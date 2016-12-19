@@ -17,11 +17,14 @@
 
 {!! Form::open(['route' => 'register']) !!}
 
-{!! Form::label('username', 'Username : ') !!}
-{!! Form::text('username') !!}
+{!! Form::label('name', 'Name : ') !!}
+{!! Form::text('name') !!}
 <br>
 {!! Form::label('password', 'Password : ') !!}
 {!! Form::password('password') !!}
+<br>
+{!! Form::label('password_confirmation', 'Password confirmation: ') !!}
+{!! Form::password('password_confirmation') !!}
 <br>
 {!! Form::label('email', 'Email : ') !!}
 {!! Form::email('email') !!}
