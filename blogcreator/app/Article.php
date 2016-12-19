@@ -27,5 +27,17 @@ class Article extends Model
      */
     protected $fillable = ['blog_id', 'user_id', 'title', 'description', 'categorie_id', 'content', 'files'];
 
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+    public function categorie()
+    {
+        return $this->belongsTo('App\Categorie');
+    }
+    public function blog()
+    {
+        return $this->belongsTo('App\Blog');
+    }
 
 }
