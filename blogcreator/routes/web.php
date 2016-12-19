@@ -14,5 +14,5 @@
 /*
  * User routes
  */
-Route::get('/register', 'Auth\RegisterController@showRegistrationForm');
+Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 Route::post('/register', 'Auth\RegisterController@register');
