@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Edit Blog {{ $blog->id }}</div>
+                    <div class="panel-heading">Create New Blog</div>
                     <div class="panel-body">
 
                         @if ($errors->any())
@@ -16,14 +16,9 @@
                             </ul>
                         @endif
 
-                        {!! Form::model($blog, [
-                            'method' => 'PATCH',
-                            'url' => ['/blog/blog', $blog->id],
-                            'class' => 'form-horizontal',
-                            'files' => true
-                        ]) !!}
+                        {!! Form::open(['url' => '/blogs', 'class' => 'form-horizontal', 'files' => true]) !!}
 
-                        @include ('Blog.blog.form', ['submitButtonText' => 'Update'])
+                        @include ('blogs.form')
 
                         {!! Form::close() !!}
 

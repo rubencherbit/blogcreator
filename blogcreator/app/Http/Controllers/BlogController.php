@@ -11,6 +11,14 @@ use Session;
 
 class BlogController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => [
+            'show'
+            ]
+        ]);
+
+    }
     /**
      * Display a listing of the resource.
      *
@@ -20,7 +28,7 @@ class BlogController extends Controller
     {
         $blog = Blog::paginate(25);
 
-        return view('Blog.blog.index', compact('blog'));
+        return view('blogs.index', compact('blog'));
     }
 
     /**
@@ -30,7 +38,7 @@ class BlogController extends Controller
      */
     public function create()
     {
-        return view('Blog.blog.create');
+        return view('blogs.create');
     }
 
     /**
@@ -60,7 +68,7 @@ class BlogController extends Controller
 
         Session::flash('flash_message', 'Blog added!');
 
-        return redirect('blog/blog');
+        return redirect('blogs');
     }
 
     /**
@@ -74,7 +82,7 @@ class BlogController extends Controller
     {
         $blog = Blog::findOrFail($id);
 
-        return view('Blog.blog.show', compact('blog'));
+        return view('blogs.show', compact('blog'));
     }
 
     /**
@@ -88,7 +96,7 @@ class BlogController extends Controller
     {
         $blog = Blog::findOrFail($id);
 
-        return view('Blog.blog.edit', compact('blog'));
+        return view('blogs.edit', compact('blog'));
     }
 
     /**
@@ -120,7 +128,7 @@ class BlogController extends Controller
 
         Session::flash('flash_message', 'Blog updated!');
 
-        return redirect('blog/blog');
+        return redirect('blogs');
     }
 
     /**
@@ -136,6 +144,6 @@ class BlogController extends Controller
 
         Session::flash('flash_message', 'Blog deleted!');
 
-        return redirect('blog/blog');
+        return redirect('blogs');
     }
 }
