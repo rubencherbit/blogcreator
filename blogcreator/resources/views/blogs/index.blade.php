@@ -25,7 +25,7 @@
                                         <td>{{ $item->title }}</td><td>{{ $item->description }}</td><td>{{ $item->banner }}</td>
                                         <td>
                                             <a href="{{ url('/blogs/' . $item->id) }}" class="btn btn-success btn-xs" title="View Blog"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"/></a>
-                                            <a href="{{ url('/blog/blog/' . $item->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit Blog"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
+                                            <a href="{{ url('/blogs/' . $item->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit Blog"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
                                             {!! Form::open([
                                                 'method'=>'DELETE',
                                                 'url' => ['/blogs', $item->id],

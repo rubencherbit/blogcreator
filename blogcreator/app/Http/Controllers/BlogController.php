@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Auth;
 
 use App\Blog;
 use Illuminate\Http\Request;
@@ -26,7 +27,7 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $blog = Blog::paginate(25);
+        $blog = Auth::user()->Blogs()->paginate(25);
 
         return view('blogs.index', compact('blog'));
     }
@@ -52,8 +53,7 @@ class BlogController extends Controller
     {
 
         $requestData = $request->all();
-
-
+        $requestData['user_id'] = Auth::id();
         if ($request->hasFile('banner')) {
             $uploadPath = public_path('/uploads/');
 
@@ -95,8 +95,11 @@ class BlogController extends Controller
     public function edit($id)
     {
         $blog = Blog::findOrFail($id);
-
-        return view('blogs.edit', compact('blog'));
+        if ($blog->user_id !== Auth::id()) {
+            return redirect()->route('home');
+        } else {
+            return view('blogs.edit', compact('blog'));
+        }
     }
 
     /**
@@ -124,11 +127,15 @@ class BlogController extends Controller
         }
 
         $blog = Blog::findOrFail($id);
-        $blog->update($requestData);
+        if ($blog->user_id !== Auth::id()) {
+            return redirect()->route('home');
+        } else {
+            $blog->update($requestData);
 
-        Session::flash('flash_message', 'Blog updated!');
+            Session::flash('flash_message', 'Blog updated!');
 
-        return redirect('blogs');
+            return redirect('blogs');
+        }
     }
 
     /**
@@ -140,10 +147,15 @@ class BlogController extends Controller
      */
     public function destroy($id)
     {
-        Blog::destroy($id);
+        $blog = Blog::findOrFail($id);
+        if ($blog->user_id !== Auth::id()) {
+            return redirect()->route('home');
+        } else {
+            Blog::destroy($id);
 
-        Session::flash('flash_message', 'Blog deleted!');
+            Session::flash('flash_message', 'Blog deleted!');
 
-        return redirect('blogs');
+            return redirect('blogs');
+        }
     }
 }
