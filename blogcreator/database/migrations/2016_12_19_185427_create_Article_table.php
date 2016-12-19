@@ -13,9 +13,10 @@ class CreateArticleTable extends Migration
      */
     public function up()
     {
-        Schema::create('article', function(Blueprint $table) {
+        Schema::create('articles', function(Blueprint $table) {
             $table->increments('id');
             $table->integer('blog_id');
+            $table->integer('categorie_id');
             $table->text('title');
             $table->text('description');
             $table->text('content');
