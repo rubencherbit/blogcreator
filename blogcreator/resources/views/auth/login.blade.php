@@ -15,7 +15,7 @@
         </ul>
 @endif
 
-{!! Form::open(['action' => 'login']) !!}
+{!! Form::open(['route' => 'login']) !!}
 
 {!! Form::label('username', 'Username : ') !!}
 {!! Form::text('username') !!}
