@@ -4,9 +4,61 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9d7cf74191936c4e69c799168e48e156",
-    "content-hash": "4aba34cd69646e8856ef9aa6e4d655c5",
+    "hash": "0df9296316ce7a85aa6b98b07aa15a6e",
+    "content-hash": "959014fc8040b93b3ad9d2a74257c6e8",
     "packages": [
+        {
+            "name": "appzcoder/crud-generator",
+            "version": "v2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/appzcoder/crud-generator.git",
+                "reference": "7b7d75aee6a0ef2bf457dd4ab975265ada3921af"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/appzcoder/crud-generator/zipball/7b7d75aee6a0ef2bf457dd4ab975265ada3921af",
+                "reference": "7b7d75aee6a0ef2bf457dd4ab975265ada3921af",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^5.1",
+                "php": ">=5.5.9"
+            },
+            "require-dev": {
+                "mockery/mockery": "^0.9.6",
+                "orchestra/testbench": "^3.3",
+                "phpunit/phpunit": "^5.7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Appzcoder\\CrudGenerator\\": "src/"
+                },
+                "classmap": [
+                    "tests"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sohel Amin",
+                    "email": "sohelamincse@gmail.com",
+                    "homepage": "http://www.appzcoder.com"
+                }
+            ],
+            "description": "Laravel 5 CRUD Generator",
+            "keywords": [
+                "crud",
+                "crud generator",
+                "laravel",
+                "laravel crud generator"
+            ],
+            "time": "2016-12-17 15:06:13"
+        },
         {
             "name": "classpreloader/classpreloader",
             "version": "3.1.0",
