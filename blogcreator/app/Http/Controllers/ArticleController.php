@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Auth;
 
 use App\Article;
 use Illuminate\Http\Request;
@@ -44,7 +45,7 @@ class ArticleController extends Controller
     {
 
         $requestData = $request->all();
-
+        $requestData['user_id'] = Auth::id();
 
         if ($request->hasFile('files')) {
             $uploadPath = public_path('/uploads/');
@@ -55,12 +56,16 @@ class ArticleController extends Controller
             $request->file('files')->move($uploadPath, $fileName);
             $requestData['files'] = $fileName;
         }
+        $blog = Blog::findOrFail($requestData['blog_id']);
+        if($blog->user_id !== Auth::id()) {
+            return redirect()->route('home');
+        } else {
+            Article::create($requestData);
 
-        Article::create($requestData);
+            Session::flash('flash_message', 'Article added!');
 
-        Session::flash('flash_message', 'Article added!');
-
-        return redirect('article');
+            return redirect('article');
+        }
     }
 
     /**
@@ -87,8 +92,11 @@ class ArticleController extends Controller
     public function edit($id)
     {
         $article = Article::findOrFail($id);
-
-        return view('article.edit', compact('article'));
+        if ($article->user_id !== Auth::id()) {
+            return redirect()->route('home');
+        } else {
+            return view('article.edit', compact('article'));
+        }
     }
 
     /**
@@ -116,11 +124,15 @@ class ArticleController extends Controller
         }
 
         $article = Article::findOrFail($id);
-        $article->update($requestData);
+        if ($article->user_id !== Auth::id() || $article->blog()->user_id !== Auth::id() ) {
+            return redirect()->route('home');
+        } else {
+            $article->update($requestData);
 
-        Session::flash('flash_message', 'Article updated!');
+            Session::flash('flash_message', 'Article updated!');
 
-        return redirect('article');
+            return redirect('article');
+        }
     }
 
     /**
@@ -132,10 +144,16 @@ class ArticleController extends Controller
      */
     public function destroy($id)
     {
-        Article::destroy($id);
+        $article = Article::findOrFail($id);
+        if ($article->user_id !== Auth::id() || $article->blog()->user_id !== Auth::id() ) {
+            return redirect()->route('home');
+        } else {
 
-        Session::flash('flash_message', 'Article deleted!');
+            Article::destroy($id);
 
-        return redirect('article');
+            Session::flash('flash_message', 'Article deleted!');
+
+            return redirect('article');
+        }
     }
 }
