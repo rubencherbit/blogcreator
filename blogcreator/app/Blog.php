@@ -25,10 +25,10 @@ class Blog extends Model
      *
      * @var array
      */
-    protected $fillable = ['title', 'description', 'banner'];
+    protected $fillable = ['title', 'description', 'banner', 'user_id'];
 
     public function user()
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo('App\User');
     }
 }
