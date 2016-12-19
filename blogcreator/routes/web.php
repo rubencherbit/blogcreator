@@ -25,9 +25,17 @@ Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 /*
  * Home routes
  */
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/', 'BlogController@index')->name('home');
 
 /*
  * Blog routes
  */
-Route::resource('blogs', 'BlogController');
+Route::resource('blogs', 'BlogController', [ 'except' => [
+    'index'
+]]);
+
+
+/*
+ * Admin routes
+ */
+Route::get('/admin/blogs', 'BlogController@indexAdmin');

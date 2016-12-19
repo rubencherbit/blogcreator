@@ -15,7 +15,8 @@ class BlogController extends Controller
     public function __construct()
     {
         $this->middleware('auth', ['except' => [
-            'show'
+            'show',
+            'index'
             ]
         ]);
 
@@ -27,9 +28,21 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $blog = Auth::user()->Blogs()->paginate(25);
+        $blog = Blog::paginate(25);
 
         return view('blogs.index', compact('blog'));
+    }
+
+    /**
+     * Display a listing of the resource for the admin.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function indexAdmin()
+    {
+        $blog = Auth::user()->Blogs()->paginate(25);
+
+        return view('blogs.index-admin', compact('blog'));
     }
 
     /**
