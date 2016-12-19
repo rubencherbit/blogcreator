@@ -31,3 +31,4 @@ Route::get('/', 'HomeController@index')->name('home');
  * Blog routes
  */
 Route::resource('blogs', 'BlogController');
+Route::resource('article', 'ArticleController');
