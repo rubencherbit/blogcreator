@@ -17,8 +17,8 @@
 
 {!! Form::open(['route' => 'login']) !!}
 
-{!! Form::label('username', 'Username : ') !!}
-{!! Form::text('username') !!}
+{!! Form::label('email', 'Email : ') !!}
+{!! Form::text('email') !!}
 <br>
 {!! Form::label('password', 'Password : ') !!}
 {!! Form::password('password') !!}
