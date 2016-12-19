@@ -6,6 +6,7 @@
                 @if (Auth::check())
                 @else
                     <li>{{ link_to_route('register', 'Register')}}</li>
+                    <li>{{ link_to_route('login', 'Login')}}</li>
                 @endif
             </ul>
         </nav>
