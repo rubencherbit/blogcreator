@@ -18,12 +18,12 @@
 
                         {!! Form::model($blog, [
                             'method' => 'PATCH',
-                            'url' => ['/blog/blog', $blog->id],
+                            'url' => ['/blogs', $blog->id],
                             'class' => 'form-horizontal',
                             'files' => true
                         ]) !!}
 
-                        @include ('Blog.blog.form', ['submitButtonText' => 'Update'])
+                        @include ('blogs.form', ['submitButtonText' => 'Update'])
 
                         {!! Form::close() !!}
 

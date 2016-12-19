@@ -16,9 +16,9 @@
                             </ul>
                         @endif
 
-                        {!! Form::open(['url' => '/blog/blog', 'class' => 'form-horizontal', 'files' => true]) !!}
+                        {!! Form::open(['url' => '/blogs', 'class' => 'form-horizontal', 'files' => true]) !!}
 
-                        @include ('Blog.blog.form')
+                        @include ('blogs.form')
 
                         {!! Form::close() !!}
 

@@ -8,7 +8,7 @@
                     <div class="panel-heading">Blog</div>
                     <div class="panel-body">
 
-                        <a href="{{ url('/blog/blog/create') }}" class="btn btn-primary btn-xs" title="Add New Blog"><span class="glyphicon glyphicon-plus" aria-hidden="true"/></a>
+                        <a href="{{ url('/blogs/create') }}" class="btn btn-primary btn-xs" title="Add New Blog"><span class="glyphicon glyphicon-plus" aria-hidden="true"/></a>
                         <br/>
                         <br/>
                         <div class="table-responsive">
@@ -24,11 +24,11 @@
                                         <td>{{ $item->id }}</td>
                                         <td>{{ $item->title }}</td><td>{{ $item->description }}</td><td>{{ $item->banner }}</td>
                                         <td>
-                                            <a href="{{ url('/blog/blog/' . $item->id) }}" class="btn btn-success btn-xs" title="View Blog"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"/></a>
+                                            <a href="{{ url('/blogs/' . $item->id) }}" class="btn btn-success btn-xs" title="View Blog"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"/></a>
                                             <a href="{{ url('/blog/blog/' . $item->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit Blog"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
                                             {!! Form::open([
                                                 'method'=>'DELETE',
-                                                'url' => ['/blog/blog', $item->id],
+                                                'url' => ['/blogs', $item->id],
                                                 'style' => 'display:inline'
                                             ]) !!}
                                                 {!! Form::button('<span class="glyphicon glyphicon-trash" aria-hidden="true" title="Delete Blog" />', array(

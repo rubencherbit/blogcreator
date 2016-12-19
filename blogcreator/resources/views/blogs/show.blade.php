@@ -8,10 +8,10 @@
                     <div class="panel-heading">Blog {{ $blog->id }}</div>
                     <div class="panel-body">
 
-                        <a href="{{ url('blog/blog/' . $blog->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit Blog"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
+                        <a href="{{ url('blogs/' . $blog->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit Blog"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
                         {!! Form::open([
                             'method'=>'DELETE',
-                            'url' => ['blog/blog', $blog->id],
+                            'url' => ['blogs', $blog->id],
                             'style' => 'display:inline'
                         ]) !!}
                             {!! Form::button('<span class="glyphicon glyphicon-trash" aria-hidden="true"/>', array(
