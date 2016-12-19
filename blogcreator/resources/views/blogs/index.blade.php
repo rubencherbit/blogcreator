@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Blog</div>
+                    <div class="panel-heading">Blogs</div>
                     <div class="panel-body">
 
                         <a href="{{ url('/blogs/create') }}" class="btn btn-primary btn-xs" title="Add New Blog"><span class="glyphicon glyphicon-plus" aria-hidden="true"/></a>
