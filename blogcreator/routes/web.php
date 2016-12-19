@@ -16,3 +16,5 @@
  */
 Route::get('/register', 'Auth\RegisterController@showRegistrationForm');
 Route::post('/register', 'Auth\RegisterController@register');
+
+Route::resource('blog/blog', 'BlogController');
