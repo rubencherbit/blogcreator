@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Auth;
 
 use App\Categorie;
 use Illuminate\Http\Request;
@@ -11,6 +12,10 @@ use Session;
 
 class CategorieController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -30,7 +35,9 @@ class CategorieController extends Controller
      */
     public function create()
     {
-        return view('categorie.create');
+        $blogs = Auth::user()->Blogs()->pluck('title', 'id')->all();
+
+        return view('categorie.create', compact('blogs'));
     }
 
     /**
@@ -42,14 +49,18 @@ class CategorieController extends Controller
      */
     public function store(Request $request)
     {
-
         $requestData = $request->all();
+        $blog = Blog::findOrFail($requestData['blog_id']);
 
-        Categorie::create($requestData);
+        if($blog->user_id !== Auth::id()) {
+            return redirect()->route('home');
+        } else {
+            Categorie::create($requestData);
 
-        Session::flash('flash_message', 'Categorie added!');
+            Session::flash('flash_message', 'Categorie added!');
 
-        return redirect('categorie');
+            return redirect('categorie');
+        }
     }
 
     /**
