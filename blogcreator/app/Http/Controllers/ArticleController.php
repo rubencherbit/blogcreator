@@ -104,7 +104,9 @@ class ArticleController extends Controller
     {
         $article = Article::findOrFail($id);
         $comments = $article->Comments()->paginate(25);
-        return view('article.show', compact('article', 'comments'));
+        $curr_blog = $article->blog;
+
+        return view('article.show', compact('article', 'comments', 'curr_blog'));
     }
 
     /**
