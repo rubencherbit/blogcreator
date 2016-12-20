@@ -88,7 +88,7 @@ class ArticleController extends Controller
 
             Session::flash('flash_message', 'Article added!');
 
-            return redirect('article');
+            return redirect('admin/articles');
         }
     }
 
@@ -155,7 +155,7 @@ class ArticleController extends Controller
 
             Session::flash('flash_message', 'Article updated!');
 
-            return redirect('article');
+            return redirect('admin/articles');
         }
     }
 
@@ -169,7 +169,7 @@ class ArticleController extends Controller
     public function destroy($id)
     {
         $article = Article::findOrFail($id);
-        if ($article->user_id !== Auth::id() || $article->blog()->user_id !== Auth::id() ) {
+        if ($article->user_id !== Auth::id() || $article->blog->user_id !== Auth::id() ) {
             return redirect()->route('home');
         } else {
 
@@ -177,7 +177,7 @@ class ArticleController extends Controller
 
             Session::flash('flash_message', 'Article deleted!');
 
-            return redirect('article');
+            return redirect('admin/articles');
         }
     }
 }
