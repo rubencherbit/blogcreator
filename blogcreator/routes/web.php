@@ -52,3 +52,5 @@ Route::resource('categorie', 'CategorieController');
 Route::get('/admin/blogs', 'BlogController@indexAdmin');
 Route::get('/admin/articles', 'ArticleController@indexAdmin');
 Route::get('/admin/categories', 'CategorieController@indexAdmin');
+
+Route::resource('comment', 'CommentController');
