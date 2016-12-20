@@ -10,6 +10,8 @@ use App\Categorie;
 use Illuminate\Http\Request;
 use Session;
 
+use App\Blog;
+
 class CategorieController extends Controller
 {
     public function __construct()
@@ -28,6 +30,12 @@ class CategorieController extends Controller
         return view('categorie.index', compact('categorie'));
     }
 
+    public function indexAdmin()
+    {
+        $categorie = Auth::user()->Categories()->paginate(25);
+
+        return view('categorie.index-admin', compact('categorie'));
+    }
     /**
      * Show the form for creating a new resource.
      *
