@@ -8,6 +8,7 @@ use Auth;
 
 use App\Article;
 use App\Blog;
+use App\Comment;
 use Illuminate\Http\Request;
 use Session;
 
@@ -102,8 +103,8 @@ class ArticleController extends Controller
     public function show($id)
     {
         $article = Article::findOrFail($id);
-
-        return view('article.show', compact('article'));
+        $comments = $article->Comments()->paginate(25);
+        return view('article.show', compact('article', 'comments'));
     }
 
     /**
