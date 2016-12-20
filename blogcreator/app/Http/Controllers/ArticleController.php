@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Auth;
 
 use App\Article;
+use App\Blog;
 use Illuminate\Http\Request;
 use Session;
 

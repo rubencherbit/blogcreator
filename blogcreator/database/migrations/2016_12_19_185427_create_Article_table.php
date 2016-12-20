@@ -17,7 +17,7 @@ class CreateArticleTable extends Migration
             $table->increments('id');
             $table->integer('blog_id');
             $table->integer('user_id');
-            $table->integer('categorie_id');
+            $table->integer('categorie_id')->nullable();
             $table->text('title');
             $table->text('description');
             $table->text('content');
