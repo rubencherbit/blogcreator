@@ -4,13 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Auth;
 
 use App\Categorie;
 use Illuminate\Http\Request;
 use Session;
 
+use App\Blog;
+
 class CategorieController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -23,6 +30,12 @@ class CategorieController extends Controller
         return view('categorie.index', compact('categorie'));
     }
 
+    public function indexAdmin()
+    {
+        $categorie = Auth::user()->Categories()->paginate(25);
+
+        return view('categorie.index-admin', compact('categorie'));
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -30,7 +43,9 @@ class CategorieController extends Controller
      */
     public function create()
     {
-        return view('categorie.create');
+        $blogs = Auth::user()->Blogs()->pluck('title', 'id')->all();
+
+        return view('categorie.create', compact('blogs'));
     }
 
     /**
@@ -42,14 +57,18 @@ class CategorieController extends Controller
      */
     public function store(Request $request)
     {
-
         $requestData = $request->all();
+        $blog = Blog::findOrFail($requestData['blog_id']);
 
-        Categorie::create($requestData);
+        if($blog->user_id !== Auth::id()) {
+            return redirect()->route('home');
+        } else {
+            Categorie::create($requestData);
 
-        Session::flash('flash_message', 'Categorie added!');
+            Session::flash('flash_message', 'Categorie added!');
 
-        return redirect('categorie');
+            return redirect('admin/categories');
+        }
     }
 
     /**
@@ -76,8 +95,13 @@ class CategorieController extends Controller
     public function edit($id)
     {
         $categorie = Categorie::findOrFail($id);
+        $blogs = Auth::user()->Blogs()->pluck('title', 'id')->all();
 
-        return view('categorie.edit', compact('categorie'));
+        if($categorie->blog->user_id !== Auth::id()) {
+            return redirect()->route('home');
+        } else {
+            return view('categorie.edit', compact('categorie', 'blogs'));
+        }
     }
 
     /**
@@ -94,11 +118,16 @@ class CategorieController extends Controller
         $requestData = $request->all();
 
         $categorie = Categorie::findOrFail($id);
-        $categorie->update($requestData);
 
-        Session::flash('flash_message', 'Categorie updated!');
+        if($categorie->blog->user_id !== Auth::id()) {
+            return redirect()->route('home');
+        } else {
+            $categorie->update($requestData);
 
-        return redirect('categorie');
+            Session::flash('flash_message', 'Categorie updated!');
+
+            return redirect('admin/categories');
+        }
     }
 
     /**
@@ -110,10 +139,15 @@ class CategorieController extends Controller
      */
     public function destroy($id)
     {
-        Categorie::destroy($id);
+        $categorie = Categorie::findOrFail($id);
+        if($categorie->blog->user_id !== Auth::id()) {
+            return redirect()->route('home');
+        } else {
+            Categorie::destroy($id);
 
-        Session::flash('flash_message', 'Categorie deleted!');
+            Session::flash('flash_message', 'Categorie deleted!');
 
-        return redirect('categorie');
+            return redirect('admin/categories');
+        }
     }
 }
