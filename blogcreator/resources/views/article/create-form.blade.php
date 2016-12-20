@@ -1,7 +1,7 @@
 <div class="form-group {{ $errors->has('blog_id') ? 'has-error' : ''}}">
-    {!! Form::label('blog_id', 'Blog Id', ['class' => 'col-md-4 control-label']) !!}
+    {!! Form::label('blog_id', 'Blog', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::select('blog_id', ['options'], null, ['class' => 'form-control']) !!}
+        {!! Form::select('blog_id', $blogs, null, ['class' => 'form-control']) !!}
         {!! $errors->first('blog_id', '<p class="help-block">:message</p>') !!}
     </div>
 </div><div class="form-group {{ $errors->has('title') ? 'has-error' : ''}}">
@@ -15,12 +15,6 @@
     <div class="col-md-6">
         {!! Form::textarea('description', null, ['class' => 'form-control']) !!}
         {!! $errors->first('description', '<p class="help-block">:message</p>') !!}
-    </div>
-</div><div class="form-group {{ $errors->has('categorie_id') ? 'has-error' : ''}}">
-    {!! Form::label('categorie_id', 'Categorie Id', ['class' => 'col-md-4 control-label']) !!}
-    <div class="col-md-6">
-        {!! Form::select('categorie_id', ['options'], null, ['class' => 'form-control']) !!}
-        {!! $errors->first('categorie_id', '<p class="help-block">:message</p>') !!}
     </div>
 </div><div class="form-group {{ $errors->has('content') ? 'has-error' : ''}}">
     {!! Form::label('content', 'Content', ['class' => 'col-md-4 control-label']) !!}

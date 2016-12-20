@@ -52,7 +52,9 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        return view('article.create');
+        $blogs = Auth::user()->Blogs()->pluck('title', 'id')->all();
+
+        return view('article.create', compact('blogs'));
     }
 
     /**

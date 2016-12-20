@@ -18,7 +18,7 @@
 
                         {!! Form::open(['url' => '/article', 'class' => 'form-horizontal', 'files' => true]) !!}
 
-                        @include ('article.form')
+                        @include ('article.create-form')
 
                         {!! Form::close() !!}
 
