@@ -4,6 +4,7 @@
         {!! Form::textarea('content', null, ['class' => 'form-control']) !!}
         {!! $errors->first('content', '<p class="help-block">:message</p>') !!}
     </div>
+        {!! Form::hidden('article_id', $article->id) !!}
 </div>
 
 <div class="form-group">

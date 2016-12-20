@@ -10,6 +10,8 @@ use App\Comment;
 use Illuminate\Http\Request;
 use Session;
 
+use App\Article;
+
 class CommentController extends Controller
 {
     /**
@@ -44,13 +46,14 @@ class CommentController extends Controller
     public function store(Request $request)
     {
         $requestData = $request->all();
+        $requestData['user_id'] = Auth::id();
         $article = Article::findOrFail($requestData['article_id']);
 
         Comment::create($requestData);
 
         Session::flash('flash_message', 'Comment added!');
 
-        return redirect('comment');
+        return redirect()->route('article.show', ['id' => $requestData['article_id']]);
     }
 
     /**
