@@ -39,3 +39,4 @@ Route::resource('blogs', 'BlogController', [ 'except' => [
  * Admin routes
  */
 Route::get('/admin/blogs', 'BlogController@indexAdmin');
+Route::resource('comment', 'CommentController');
