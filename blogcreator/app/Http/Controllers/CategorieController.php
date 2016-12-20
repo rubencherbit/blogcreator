@@ -67,7 +67,7 @@ class CategorieController extends Controller
 
             Session::flash('flash_message', 'Categorie added!');
 
-            return redirect('categorie');
+            return redirect('admin/categories');
         }
     }
 
@@ -95,8 +95,13 @@ class CategorieController extends Controller
     public function edit($id)
     {
         $categorie = Categorie::findOrFail($id);
+        $blogs = Auth::user()->Blogs()->pluck('title', 'id')->all();
 
-        return view('categorie.edit', compact('categorie'));
+        if($categorie->blog->user_id !== Auth::id()) {
+            return redirect()->route('home');
+        } else {
+            return view('categorie.edit', compact('categorie', 'blogs'));
+        }
     }
 
     /**
@@ -113,11 +118,16 @@ class CategorieController extends Controller
         $requestData = $request->all();
 
         $categorie = Categorie::findOrFail($id);
-        $categorie->update($requestData);
 
-        Session::flash('flash_message', 'Categorie updated!');
+        if($categorie->blog->user_id !== Auth::id()) {
+            return redirect()->route('home');
+        } else {
+            $categorie->update($requestData);
 
-        return redirect('categorie');
+            Session::flash('flash_message', 'Categorie updated!');
+
+            return redirect('admin/categories');
+        }
     }
 
     /**
@@ -129,10 +139,15 @@ class CategorieController extends Controller
      */
     public function destroy($id)
     {
-        Categorie::destroy($id);
+        $categorie = Categorie::findOrFail($id);
+        if($categorie->blog->user_id !== Auth::id()) {
+            return redirect()->route('home');
+        } else {
+            Categorie::destroy($id);
 
-        Session::flash('flash_message', 'Categorie deleted!');
+            Session::flash('flash_message', 'Categorie deleted!');
 
-        return redirect('categorie');
+            return redirect('admin/categories');
+        }
     }
 }
