@@ -39,5 +39,8 @@ class Article extends Model
     {
         return $this->belongsTo('App\Blog');
     }
-
+    public function comments()
+    {
+        return $this->hasMany('App\Comment');
+    }
 }
