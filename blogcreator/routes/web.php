@@ -36,7 +36,18 @@ Route::resource('blogs', 'BlogController', [ 'except' => [
 
 
 /*
+ * Article routes
+ */
+Route::resource('article', 'ArticleController');
+
+
+/*
+ * Categorie routes
+ */
+Route::resource('categorie', 'CategorieController');
+
+/*
  * Admin routes
  */
 Route::get('/admin/blogs', 'BlogController@indexAdmin');
-Route::resource('categorie', 'CategorieController');
+Route::get('/admin/articles', 'ArticleController@indexAdmin');
