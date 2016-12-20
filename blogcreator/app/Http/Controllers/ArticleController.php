@@ -12,6 +12,15 @@ use Session;
 
 class ArticleController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => [
+            'show',
+            'index'
+            ]
+        ]);
+
+    }
     /**
      * Display a listing of the resource.
      *
@@ -22,6 +31,18 @@ class ArticleController extends Controller
         $article = Article::paginate(25);
 
         return view('article.index', compact('article'));
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function indexAdmin()
+    {
+        $article = Auth::user()->Articles()->paginate(25);
+
+        return view('article.index-admin', compact('article'));
     }
 
     /**
