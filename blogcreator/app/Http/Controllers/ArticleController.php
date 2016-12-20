@@ -116,10 +116,13 @@ class ArticleController extends Controller
     public function edit($id)
     {
         $article = Article::findOrFail($id);
+        $categories = $article->blog->categories()->pluck('name', 'id')->all();
+        array_unshift($categories, 'No categorie');
+
         if ($article->user_id !== Auth::id()) {
             return redirect()->route('home');
         } else {
-            return view('article.edit', compact('article'));
+            return view('article.edit', compact('article', 'categories'));
         }
     }
 
@@ -148,7 +151,7 @@ class ArticleController extends Controller
         }
 
         $article = Article::findOrFail($id);
-        if ($article->user_id !== Auth::id() || $article->blog()->user_id !== Auth::id() ) {
+        if ($article->user_id !== Auth::id() || $article->blog->user_id !== Auth::id() ) {
             return redirect()->route('home');
         } else {
             $article->update($requestData);
