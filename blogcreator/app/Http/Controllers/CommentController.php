@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use Auth;
 use App\Comment;
 use Illuminate\Http\Request;
 use Session;
@@ -42,8 +43,8 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-
         $requestData = $request->all();
+        $article = Article::findOrFail($requestData['article_id']);
 
         Comment::create($requestData);
 
@@ -76,8 +77,11 @@ class CommentController extends Controller
     public function edit($id)
     {
         $comment = Comment::findOrFail($id);
-
-        return view('comment.edit', compact('comment'));
+        if($comment->blog->user_id === Auth::id()) {
+            return redirect()->route('home');
+        } else {
+            return view('comment.edit', compact('comment'));
+        }
     }
 
     /**
@@ -93,12 +97,16 @@ class CommentController extends Controller
 
         $requestData = $request->all();
 
-        $comment = Comment::findOrFail($id);
-        $comment->update($requestData);
+        $comment = Comment::findorfail($id);
+        if($comment->blog->user_id === Auth::id()) {
+            return redirect()->route('home');
+        } else {
+            $comment->update($requestData);
 
-        Session::flash('flash_message', 'Comment updated!');
+            Session::flash('flash_message', 'Comment updated!');
 
-        return redirect('comment');
+            return redirect('comment');
+        }
     }
 
     /**
@@ -110,10 +118,15 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
-        Comment::destroy($id);
+        $comment = Comment::findorfail($id);
+        if($comment->blog->user_id === Auth::id() || $comment->user_id === Auth::id()) {
+            return redirect()->route('home');
+        } else {
+            Comment::destroy($id);
 
-        Session::flash('flash_message', 'Comment deleted!');
+            Session::flash('flash_message', 'Comment deleted!');
 
-        return redirect('comment');
+            return redirect('comment');
+        }
     }
 }
