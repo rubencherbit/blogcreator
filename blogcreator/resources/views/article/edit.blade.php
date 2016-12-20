@@ -23,7 +23,7 @@
                             'files' => true
                         ]) !!}
 
-                        @include ('article.form', ['submitButtonText' => 'Update'])
+                        @include ('article.edit-form', ['submitButtonText' => 'Update'])
 
                         {!! Form::close() !!}
 
