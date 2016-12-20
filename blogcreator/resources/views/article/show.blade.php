@@ -34,7 +34,15 @@
                                 </tbody>
                             </table>
                         </div>
+                        @if (Auth::guest())
+                            <p>Please login to post a comment<p>
+                        @else
+                        {!! Form::open(['url' => '/comment', 'class' => 'form-horizontal']) !!}
+                        <h2>Post a comment</h2>
+                        @include ('comment.create-form')
 
+                        {!! Form::close() !!}
+                        @endif
                     </div>
                 </div>
             </div>
