@@ -11,6 +11,9 @@
                     @include ('article.list')
 
                     @include ('categorie.list')
+
+                    @include ('article.list-date')
+
                     </div>
                 </div>
             </div>
