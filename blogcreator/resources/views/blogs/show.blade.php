@@ -8,13 +8,7 @@
                     <div class="panel-heading">{{ $curr_blog->title }}</div>
                     <div class="panel-body">
 
-                        <div class="table-responsive">
-                            <table class="table table-borderless">
-                                <tbody>
-                                ARTICLES
-                                </tbody>
-                            </table>
-                        </div>
+                    @include ('article.list')
 
                     </div>
                 </div>
