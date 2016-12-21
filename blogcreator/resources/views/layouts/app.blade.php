@@ -72,7 +72,7 @@
                 </ul>
                 <ul class="nav navbar-nav">
                     @if (!empty($curr_blog))
-                    <li><a href="{{ ('/blogs/' . $curr_blog->id) }}">{{ $curr_blog->title }} by {{ $curr_blog->user->name }}</a></li>
+                    <li><a href="{{ ('/blogs/' . $curr_blog->id) }}">{{ $curr_blog->title }} by {{ $curr_blog->user->name }}<br>"{{ $curr_blog->description }}"</a></li>
                     @endif
                 </ul>
             </div>
