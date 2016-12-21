@@ -34,6 +34,19 @@
                                 </tbody>
                             </table>
                         </div>
+
+                        <div>
+                            <ul>
+                                @foreach ($attachments as $attachment)
+                                <li>
+                                {{$attachment->hash}} :
+                                <br>
+                                @include ('article.show-attachment')
+                                </li>
+                                @endforeach
+                            </ul>
+                        </div>
+
                         <div>
                             <h2>Comments</h2>
                             @include ('comment.article-comments')

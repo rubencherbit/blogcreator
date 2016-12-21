@@ -9,6 +9,7 @@ use Auth;
 use App\Article;
 use App\Blog;
 use App\Comment;
+use App\Attachment;
 use Illuminate\Http\Request;
 use Session;
 
@@ -72,20 +73,15 @@ class ArticleController extends Controller
         $requestData = $request->all();
         $requestData['user_id'] = Auth::id();
 
-        if ($request->hasFile('files')) {
-            $uploadPath = public_path('/uploads/');
-
-            $extension = $request->file('files')->getClientOriginalExtension();
-            $fileName = rand(11111, 99999) . '.' . $extension;
-
-            $request->file('files')->move($uploadPath, $fileName);
-            $requestData['files'] = $fileName;
-        }
         $blog = Blog::findOrFail($requestData['blog_id']);
         if($blog->user_id !== Auth::id()) {
             return redirect()->route('home');
         } else {
-            Article::create($requestData);
+            $article = Article::create($requestData);
+
+            if ($request->hasFile('attachments')) {
+                $article->proceedAttachments($request->file('attachments'));
+            }
 
             Session::flash('flash_message', 'Article added!');
 
@@ -103,10 +99,11 @@ class ArticleController extends Controller
     public function show($id)
     {
         $article = Article::findOrFail($id);
+        $attachments = $article->attachments;
         $comments = $article->Comments()->paginate(25);
         $curr_blog = $article->blog;
 
-        return view('article.show', compact('article', 'comments', 'curr_blog'));
+        return view('article.show', compact('article', 'attachments', 'comments', 'curr_blog'));
     }
 
     /**
@@ -119,13 +116,14 @@ class ArticleController extends Controller
     public function edit($id)
     {
         $article = Article::findOrFail($id);
+        $attachments = $article->attachments;
         $categories = $article->blog->categories()->pluck('name', 'id')->all();
         array_unshift($categories, 'No categorie');
 
         if ($article->user_id !== Auth::id()) {
             return redirect()->route('home');
         } else {
-            return view('article.edit', compact('article', 'categories'));
+            return view('article.edit', compact('article', 'attachments','categories'));
         }
     }
 
@@ -142,22 +140,15 @@ class ArticleController extends Controller
 
         $requestData = $request->all();
 
-
-        if ($request->hasFile('files')) {
-            $uploadPath = public_path('/uploads/');
-
-            $extension = $request->file('files')->getClientOriginalExtension();
-            $fileName = rand(11111, 99999) . '.' . $extension;
-
-            $request->file('files')->move($uploadPath, $fileName);
-            $requestData['files'] = $fileName;
-        }
-
         $article = Article::findOrFail($id);
         if ($article->user_id !== Auth::id() || $article->blog->user_id !== Auth::id() ) {
             return redirect()->route('home');
         } else {
             $article->update($requestData);
+
+            if ($request->hasFile('attachments')) {
+                $article->proceedAttachments($request->file('attachments'));
+            }
 
             Session::flash('flash_message', 'Article updated!');
 
@@ -184,6 +175,21 @@ class ArticleController extends Controller
             Session::flash('flash_message', 'Article deleted!');
 
             return redirect('admin/articles');
+        }
+    }
+
+
+    public function destroyAttachment($id)
+    {
+        $attachment = Attachment::findOrFail($id);
+        $user = Auth::user();
+
+        if ($attachment->article->user_id == $user->id) {
+            $attachment->delete();
+
+            return redirect()->route('article.edit', $attachment->article_id);
+        } else {
+            return redirect()->route('home');
         }
     }
 }
