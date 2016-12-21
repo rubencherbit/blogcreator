@@ -68,7 +68,7 @@ class BlogController extends Controller
         $requestData = $request->all();
         $requestData['user_id'] = Auth::id();
         if ($request->hasFile('banner')) {
-            $uploadPath = public_path('/uploads/');
+            $uploadPath = public_path('/uploads/banners/');
 
             $extension = $request->file('banner')->getClientOriginalExtension();
             $fileName = rand(11111, 99999) . '.' . $extension;
