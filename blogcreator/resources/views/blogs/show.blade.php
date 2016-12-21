@@ -10,6 +10,7 @@
 
                     @include ('article.list')
 
+                    @include ('categorie.list')
                     </div>
                 </div>
             </div>

@@ -95,7 +95,8 @@ class BlogController extends Controller
     {
         $curr_blog = Blog::findOrFail($id);
         $articles = $curr_blog->articles;
-        return view('blogs.show', compact('curr_blog', 'articles'));
+        $categories = $curr_blog->categories;
+        return view('blogs.show', compact('curr_blog', 'articles', 'categories'));
     }
 
     /**

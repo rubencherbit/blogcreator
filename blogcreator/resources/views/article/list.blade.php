@@ -1,5 +1,6 @@
 <div class="table-responsive">
     <table class="table table-borderless">
+        <h2>Articles</h2>
         <thead>
             <tr>
                 <th> Title </th><th> Categorie </th><th> Author </th><th> Post date </th>
