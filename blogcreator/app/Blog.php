@@ -36,4 +36,8 @@ class Blog extends Model
     {
         return $this->hasMany('App\Categorie');
     }
+    public function articles()
+    {
+        return $this->hasMany('App\Article');
+    }
 }
