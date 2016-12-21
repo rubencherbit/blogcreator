@@ -99,10 +99,11 @@ class ArticleController extends Controller
     public function show($id)
     {
         $article = Article::findOrFail($id);
+        $attachments = $article->attachments;
         $comments = $article->Comments()->paginate(25);
         $curr_blog = $article->blog;
 
-        return view('article.show', compact('article', 'comments', 'curr_blog'));
+        return view('article.show', compact('article', 'attachments', 'comments', 'curr_blog'));
     }
 
     /**
