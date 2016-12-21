@@ -9,6 +9,7 @@ use Auth;
 use App\Article;
 use App\Blog;
 use App\Comment;
+use App\Attachment;
 use Illuminate\Http\Request;
 use Session;
 
@@ -114,13 +115,14 @@ class ArticleController extends Controller
     public function edit($id)
     {
         $article = Article::findOrFail($id);
+        $attachments = $article->attachments;
         $categories = $article->blog->categories()->pluck('name', 'id')->all();
         array_unshift($categories, 'No categorie');
 
         if ($article->user_id !== Auth::id()) {
             return redirect()->route('home');
         } else {
-            return view('article.edit', compact('article', 'categories'));
+            return view('article.edit', compact('article', 'attachments','categories'));
         }
     }
 
@@ -172,6 +174,21 @@ class ArticleController extends Controller
             Session::flash('flash_message', 'Article deleted!');
 
             return redirect('admin/articles');
+        }
+    }
+
+
+    public function destroyAttachment($id)
+    {
+        $attachment = Attachment::findOrFail($id);
+        $user = Auth::user();
+
+        if ($attachment->article->user_id == $user->id) {
+            $attachment->delete();
+
+            return redirect()->route('article.edit', $attachment->article_id);
+        } else {
+            return redirect()->route('home');
         }
     }
 }
