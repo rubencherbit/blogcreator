@@ -3,6 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
+use App\Blog;
+use App\Article;
 
 class Blog extends Model
 {
@@ -39,5 +42,26 @@ class Blog extends Model
     public function articles()
     {
         return $this->hasMany('App\Article');
+    }
+
+    public function months()
+    {
+        $years = Article::select('created_at')
+            ->where('blog_id', $this->id)
+            ->get()
+            ->groupBy(function($date) {
+                return Carbon::parse($date->created_at)->format('Y-m'); // grouping by months
+            });
+        return $years;
+    }
+    public function years()
+    {
+        $years = Article::select('created_at')
+            ->where('blog_id', $this->id)
+            ->get()
+            ->groupBy(function($date) {
+                return Carbon::parse($date->created_at)->format('Y'); // grouping by years
+            });
+        return $years;
     }
 }
