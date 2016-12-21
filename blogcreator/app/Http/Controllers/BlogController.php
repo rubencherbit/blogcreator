@@ -93,9 +93,13 @@ class BlogController extends Controller
      */
     public function show($id)
     {
-        $blog = Blog::findOrFail($id);
+        $curr_blog = Blog::findOrFail($id);
+        $articles = $curr_blog->articles;
+        $categories = $curr_blog->categories;
+        $years = $curr_blog->years();
+        $months = $curr_blog->months();
 
-        return view('blogs.show', compact('blog'));
+        return view('blogs.show', compact('curr_blog', 'articles', 'categories', 'years', 'months'));
     }
 
     /**

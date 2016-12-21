@@ -19,7 +19,9 @@ class ArticleController extends Controller
     {
         $this->middleware('auth', ['except' => [
             'show',
-            'index'
+            'index',
+            'getByYear',
+            'getByMonth',
             ]
         ]);
 
@@ -191,5 +193,23 @@ class ArticleController extends Controller
         } else {
             return redirect()->route('home');
         }
+    }
+
+    public function getByYear($blog_id, $year)
+    {
+        $curr_blog = Blog::findOrFail($blog_id);
+        $articles = $curr_blog->articles()->whereYear('created_at', '=', $year)->get();
+        $date = $year;
+
+        return view('article.list-by', compact('curr_blog', 'articles', 'date'));
+    }
+
+    public function getByMonth($blog_id, $month)
+    {
+        $curr_blog = Blog::findOrFail($blog_id);
+        $articles = $curr_blog->articles()->whereDate('created_at', 'LIKE', $month . '-%')->get();
+        $date = $month;
+
+        return view('article.list-by', compact('curr_blog', 'articles', 'date'));
     }
 }

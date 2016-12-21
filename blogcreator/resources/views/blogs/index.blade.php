@@ -12,13 +12,17 @@
                             <table class="table table-borderless">
                                 <thead>
                                     <tr>
-                                        <th> Title </th><th> Description </th><th> Banner </th>
+                                        <th> Title </th>
+                                        <th> Description </th>
+                                        <th> Author </th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($blog as $item)
                                     <tr>
-                                        <td>{{ $item->title }}</td><td>{{ $item->description }}</td><td>{{ $item->banner }}</td>
+                                        <td><a href="{{ url('/blogs/' . $item->id) }}" title="View Blog">{{ $item->title }}</a></td>
+                                        <td>{{ $item->description }}</td>
+                                        <td>{{ $item->user->name }}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>
