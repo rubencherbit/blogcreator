@@ -27,6 +27,30 @@
 
                         {!! Form::close() !!}
 
+                        <div>
+                            <ul>
+                                @foreach ($attachments as $attachment)
+                                <li>
+                                {{$attachment->hash}} :
+                                {!! Form::open([
+                                    'method'=>'DELETE',
+                                    'url' => ['article/destroy-attachment', $attachment->id],
+                                    'style' => 'display:inline'
+                                ]) !!}
+                                    {!! Form::button('<span class="glyphicon glyphicon-trash" aria-hidden="true" title="Delete Attachment" />', array(
+                                            'type' => 'submit',
+                                            'class' => 'btn btn-danger btn-xs',
+                                            'title' => 'Delete Attachment',
+                                            'onclick'=>'return confirm("Confirm delete?")'
+                                    )) !!}
+                                {!! Form::close() !!}
+                                <br>
+                                @include ('article.show-attachment')
+                                </li>
+                                @endforeach
+                            </ul>
+                        </div>
+
                     </div>
                 </div>
             </div>
