@@ -1,6 +1,9 @@
 <div class="table-responsive">
     <table class="table table-borderless">
-        <h2>Articles</h2>
+        <h2>Articles
+            {{ isset($date) ? "for $date" : ''}}
+            {{ isset($categorie) ? "for $categorie->name" : ''}}
+        </h2>
         <thead>
             <tr>
                 <th> Title </th><th> Categorie </th><th> Author </th><th> Post date </th>
