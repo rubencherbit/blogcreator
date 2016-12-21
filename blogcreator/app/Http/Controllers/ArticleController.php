@@ -72,20 +72,15 @@ class ArticleController extends Controller
         $requestData = $request->all();
         $requestData['user_id'] = Auth::id();
 
-        if ($request->hasFile('files')) {
-            $uploadPath = public_path('/uploads/');
-
-            $extension = $request->file('files')->getClientOriginalExtension();
-            $fileName = rand(11111, 99999) . '.' . $extension;
-
-            $request->file('files')->move($uploadPath, $fileName);
-            $requestData['files'] = $fileName;
-        }
         $blog = Blog::findOrFail($requestData['blog_id']);
         if($blog->user_id !== Auth::id()) {
             return redirect()->route('home');
         } else {
-            Article::create($requestData);
+            $article = Article::create($requestData);
+
+            if ($request->hasFile('attachments')) {
+                $article->proceedAttachments($request->file('attachments'));
+            }
 
             Session::flash('flash_message', 'Article added!');
 
@@ -143,14 +138,14 @@ class ArticleController extends Controller
         $requestData = $request->all();
 
 
-        if ($request->hasFile('files')) {
+        if ($request->hasFile('attachments')) {
             $uploadPath = public_path('/uploads/');
 
-            $extension = $request->file('files')->getClientOriginalExtension();
+            $extension = $request->file('attachments')->getClientOriginalExtension();
             $fileName = rand(11111, 99999) . '.' . $extension;
 
-            $request->file('files')->move($uploadPath, $fileName);
-            $requestData['files'] = $fileName;
+            $request->file('attachments')->move($uploadPath, $fileName);
+            $requestData['attachments'] = $fileName;
         }
 
         $article = Article::findOrFail($id);

@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+use App\Attachment;
+
 class Article extends Model
 {
     /**
@@ -42,5 +44,23 @@ class Article extends Model
     public function comments()
     {
         return $this->hasMany('App\Comment');
+    }
+
+    public function proceedAttachments($attachments)
+    {
+        foreach($attachments as $attachment) {
+            if($attachment->isValid()) {
+                $uploadPath = public_path('uploads/attachments/');
+
+                $extension = $attachment->getClientOriginalExtension();
+                $fileName = rand(11111, 99999) . '.' . $extension;
+                $attachment->move($uploadPath, $fileName);
+
+                $attachment = new Attachment;
+                $attachment->hash = $fileName;
+                $attachment->article_id = $this->id;
+                $attachment->save();
+            }
+        }
     }
 }
