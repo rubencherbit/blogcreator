@@ -39,6 +39,7 @@ Route::resource('blogs', 'BlogController', [ 'except' => [
  * Article routes
  */
 Route::resource('article', 'ArticleController');
+Route::delete('article/destroy-attachment/{id}', 'ArticleController@destroyAttachment')->where('id', '[0-9]+');
 
 
 /*
