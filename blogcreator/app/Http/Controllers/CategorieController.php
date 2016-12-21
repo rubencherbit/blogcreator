@@ -84,8 +84,9 @@ class CategorieController extends Controller
     public function show($id)
     {
         $categorie = Categorie::findOrFail($id);
-
-        return view('categorie.show', compact('categorie'));
+        $curr_blog = $categorie->blog;
+        $articles = $categorie->articles;
+        return view('categorie.show', compact('categorie', 'articles', 'curr_blog'));
     }
 
     /**
