@@ -18,7 +18,7 @@ class CreateBlogTable extends Migration
             $table->integer('user_id');
             $table->text('title');
             $table->text('description');
-            $table->text('banner');
+            $table->text('banner')->nullable();
             $table->timestamps();
         });
     }
