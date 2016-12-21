@@ -12,7 +12,15 @@
                             <table class="table table-borderless">
                                 <tbody>
                                     <tr><th> Post date </th><td>{{ $article->created_at }}</td></tr>
-                                    <tr><th> Categorie </th><td> {{ (isset($article->categorie->name)) ? $article->categorie->name : 'No categorie' }} </td></tr>
+                                    <tr><th> Categorie </th>
+                                        <td>
+                                        @if (isset($article->categorie->name))
+                                        <a href="{{ url('/categorie/' . $article->categorie->id) }}" title="View Categorie">{{ $article->categorie->name }}</a>
+                                        @else
+                                        No categorie
+                                        @endif
+                                        </td>
+                                    </tr>
                                     <tr><th> Author </th><td> {{ $article->user->name }} </td></tr>
                                     <tr><th> Description </th><td> {{ $article->description }} </td></tr>
                                     <tr><th> Content </th><td> {{ $article->content }} </td></tr>

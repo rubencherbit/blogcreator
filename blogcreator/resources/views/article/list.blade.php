@@ -9,7 +9,13 @@
         @foreach($articles as $item)
             <tr>
                 <td><a href="{{ url('/article/' . $item->id) }}" title="View Article">{{ $item->title }}</a></td>
-                <td>{{ (isset($item->categorie->name)) ? $item->categorie->name : 'No categorie' }}</td>
+                <td>
+                    @if (isset($item->categorie->name))
+                    <a href="{{ url('/categorie/' . $item->categorie->id) }}" title="View Categorie">{{ $item->categorie->name }}</a>
+                    @else
+                    No categorie
+                    @endif
+                </td>
                 <td>{{ $item->user->name }}</td>
                 <td>{{ $item->created_at }}</td>
             </tr>
