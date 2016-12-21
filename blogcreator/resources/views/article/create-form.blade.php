@@ -23,7 +23,7 @@
         {!! $errors->first('content', '<p class="help-block">:message</p>') !!}
     </div>
 </div><div class="form-group {{ $errors->has('attachments') ? 'has-error' : ''}}">
-    {!! Form::label('attachments', 'attachments', ['class' => 'col-md-4 control-label']) !!}
+    {!! Form::label('attachments', 'Attachments', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
         {!! Form::file('attachments[]', ['multiple' => true], ['class' => 'form-control']) !!}
         {!! $errors->first('attachments', '<p class="help-block">:message</p>') !!}

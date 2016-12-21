@@ -137,22 +137,15 @@ class ArticleController extends Controller
 
         $requestData = $request->all();
 
-
-        if ($request->hasFile('attachments')) {
-            $uploadPath = public_path('/uploads/');
-
-            $extension = $request->file('attachments')->getClientOriginalExtension();
-            $fileName = rand(11111, 99999) . '.' . $extension;
-
-            $request->file('attachments')->move($uploadPath, $fileName);
-            $requestData['attachments'] = $fileName;
-        }
-
         $article = Article::findOrFail($id);
         if ($article->user_id !== Auth::id() || $article->blog->user_id !== Auth::id() ) {
             return redirect()->route('home');
         } else {
             $article->update($requestData);
+
+            if ($request->hasFile('attachments')) {
+                $article->proceedAttachments($request->file('attachments'));
+            }
 
             Session::flash('flash_message', 'Article updated!');
 

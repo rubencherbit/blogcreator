@@ -22,11 +22,11 @@
         {!! Form::textarea('content', null, ['class' => 'form-control']) !!}
         {!! $errors->first('content', '<p class="help-block">:message</p>') !!}
     </div>
-</div><div class="form-group {{ $errors->has('files') ? 'has-error' : ''}}">
-    {!! Form::label('files', 'Files', ['class' => 'col-md-4 control-label']) !!}
+</div><div class="form-group {{ $errors->has('attachments') ? 'has-error' : ''}}">
+    {!! Form::label('attachments', 'Attachments', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::file('files', null, ['class' => 'form-control']) !!}
-        {!! $errors->first('files', '<p class="help-block">:message</p>') !!}
+        {!! Form::file('attachments[]', ['multiple' => true], ['class' => 'form-control']) !!}
+        {!! $errors->first('attachments', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
 
