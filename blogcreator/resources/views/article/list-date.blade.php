@@ -9,7 +9,7 @@
         <tbody>
         @foreach($years as $year => $foo)
             <tr>
-                <td><a href="{{ url('/categorie/' . $year) }}" title="View Categorie">{{ $year }}</a></td>
+                <td><a href="{{ url('blog/' . $curr_blog->id . '/article/by-year/' . $year) }}" title="View Articles by Year">{{ $year }}</a></td>
             </tr>
         @endforeach
         </tbody>
@@ -25,7 +25,7 @@
         <tbody>
         @foreach($months as $month => $foo)
             <tr>
-                <td><a href="{{ url('/categorie/' . $month) }}" title="View Categorie">{{ $month }}</a></td>
+                <td><a href="{{ url('blog/' . $curr_blog->id . '/article/by-month/' . $month) }}" title="View Articles by Month">{{ $month }}</a></td>
             </tr>
         @endforeach
         </tbody>
