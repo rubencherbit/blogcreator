@@ -26,7 +26,7 @@ class MessageController extends Controller
      */
     public function index()
     {
-        $message = Message::paginate(25);
+        $message = Auth::user()->receivedMessages()->paginate(25);
 
         return view('message.index', compact('message'));
     }
