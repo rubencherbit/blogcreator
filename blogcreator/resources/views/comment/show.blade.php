@@ -5,10 +5,9 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Comment {{ $comment->id }}</div>
+                    <div class="panel-heading">Comment by {{ $comment->user->name }}</div>
                     <div class="panel-body">
 
-                        <a href="{{ url('comment/' . $comment->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit Comment"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
                         {!! Form::open([
                             'method'=>'DELETE',
                             'url' => ['comment', $comment->id],
@@ -28,9 +27,25 @@
                             <table class="table table-borderless">
                                 <tbody>
                                     <tr>
-                                        <th>ID</th><td>{{ $comment->id }}</td>
+                                        <th> Content </th>
+                                        <td> {{ $comment->content }} </td>
                                     </tr>
-                                    <tr><th> Content </th><td> {{ $comment->content }} </td></tr>
+                                    <tr>
+                                        <th> Author </th>
+                                        <td> {{ $comment->user->name }} </td>
+                                    </tr>
+                                    <tr>
+                                        <th> Blog </th>
+                                        <td><a href="{{ url('/blogs/' . $comment->article->blog->id) }}" title="View Blog">{{ $comment->article->blog->title }}</a></td>
+                                    </tr>
+                                    <tr>
+                                        <th> Article </th>
+                                        <td><a href="{{ url('/article/' . $comment->article->id) }}" title="View Article">{{ $comment->article->title }}</a></td>
+                                    </tr>
+                                    <tr>
+                                        <th> Date </th>
+                                        <td> {{ $comment->created_at }} </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
