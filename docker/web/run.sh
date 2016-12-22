@@ -4,14 +4,6 @@ chown -R www-data:www-data /var/www/html/storage
 
 composer install
 
-n=0
-until [ $n -ge 5 ]
-do
-    php artisan migrate && break  # substitute your command here
-    n=$[$n+1]
-    sleep 15
-done
-
 cd /var/www/html
 
 if [ ! -f .env ]; then
@@ -19,5 +11,13 @@ if [ ! -f .env ]; then
 fi
 
 php artisan key:generate
+
+n=0
+until [ $n -ge 5 ]
+do
+    php artisan migrate && break  # substitute your command here
+    n=$[$n+1]
+    sleep 15
+done
 
 exec apache2-foreground
