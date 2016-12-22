@@ -27,4 +27,16 @@ class Message extends Model
      */
     protected $fillable = ['receiver_id', 'title', 'content', 'sender_id', 'is_read'];
 
+    public function sender() {
+        return $this->belongsTo('App\User', 'sender_id');
+    }
+
+    public function receiver() {
+        return $this->belongsTo('App\User', 'receiver_id');
+
+    }
+
+    public function isRead() {
+        return ($this->is_read === 0) ? 'Not read' : 'Read';
+    }
 }
