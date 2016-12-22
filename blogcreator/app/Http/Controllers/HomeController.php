@@ -6,6 +6,12 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+    public function indexAdmin()
+    {
+        return view('blogs.admin');
+    }
+
+
     /**
      * Display a listing of the resource.
      *
