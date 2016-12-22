@@ -22,7 +22,7 @@
                                     <tr>
                                         <td><a href="{{ url('/blogs/' . $item->id) }}" title="View Blog">{{ $item->title }}</a></td>
                                         <td>{{ $item->description }}</td>
-                                        <td>{{ $item->user->name }}</td>
+                                        <td><a href="{{ url('/user/' . $item->user->id) }}" title="View User">{{ $item->user->name }}</a></td>
                                     </tr>
                                 @endforeach
                                 </tbody>

@@ -20,7 +20,7 @@
                     No categorie
                     @endif
                 </td>
-                <td>{{ $item->user->name }}</td>
+                <td><a href="{{ url('/user/' . $item->user->id) }}" title="View Blog">{{ $item->user->name }}</a></td>
                 <td>{{ $item->created_at }}</td>
             </tr>
         @endforeach

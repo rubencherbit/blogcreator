@@ -24,7 +24,7 @@
                                 @foreach($comment as $item)
                                     <tr>
                                         <td>{{ $item->content }}</td>
-                                        <td>{{ $item->user->name }}</td>
+                                        <td><a href="{{ url('/user/' . $item->user->id) }}" title="View User">{{ $item->user->name }}</a></td>
                                         <td><a href="{{ url('/blogs/' . $item->article->blog->id) }}" title="View Blog">{{ $item->article->blog->title }}</a></td>
                                         <td><a href="{{ url('/article/' . $item->article->id) }}" title="View Article">{{ $item->article->title }}</a></td>
                                         <td>{{ $item->created_at }}</td>

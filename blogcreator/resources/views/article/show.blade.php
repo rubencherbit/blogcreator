@@ -21,7 +21,7 @@
                                         @endif
                                         </td>
                                     </tr>
-                                    <tr><th> Author </th><td> {{ $article->user->name }} </td></tr>
+                                    <tr><th> Author </th><td><a href="{{ url('/user/' . $article->user->id) }}" title="View User">{{ $article->user->name }}</a></td></tr>
                                     <tr><th> Description </th><td> {{ $article->description }} </td></tr>
                                     <tr><th> Content </th><td> {{ $article->content }} </td></tr>
                                 </tbody>
