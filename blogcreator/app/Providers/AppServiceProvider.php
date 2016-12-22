@@ -38,6 +38,19 @@ class AppServiceProvider extends ServiceProvider
                 $article->delete();
             }
         });
+
+        Blog::deleted(function ($blog) {
+            $categories = $blog->categories;
+            foreach($categories as $categorie) {
+                $categorie->delete();
+            }
+
+            $articles = $blog->articles;
+            foreach($articles as $article) {
+                $article->delete();
+            }
+        });
+
     }
 
     /**
