@@ -18,6 +18,7 @@
                                         <th> Blog </th>
                                         <th> Name </th>
                                         <th> Description </th>
+                                        <th> Nb articles</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -27,6 +28,7 @@
                                         <td><a href="{{ url('/blogs/' . $item->blog->id) }}">{{ $item->blog->title }}</a></td>
                                         <td><a href="{{ url('/categorie/' . $item->id) }}">{{ $item->name }}</a></td>
                                         <td>{{ $item->description }}</td>
+                                        <td>{{ $item->articles->count() }}</td>
                                         <td>
                                             <a href="{{ url('/categorie/' . $item->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit Categorie"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
                                             {!! Form::open([
