@@ -20,6 +20,7 @@
                                         <th> Banner </th>
                                         <th>Nb articles</th>
                                         <th>Nb coms</th>
+                                        <th>Nb cats</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -33,6 +34,7 @@
                                         </td>
                                         <td>{{ $item->articles->count() }}</td>
                                         <td>{{ $item->comments->count() }}</td>
+                                        <td>{{ $item->categories->count() }}</td>
                                         <td>
                                             <a href="{{ url('/blogs/' . $item->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit Blog"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
                                             {!! Form::open([

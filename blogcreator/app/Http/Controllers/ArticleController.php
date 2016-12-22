@@ -121,7 +121,7 @@ class ArticleController extends Controller
         $article = Article::findOrFail($id);
         $attachments = $article->attachments;
         $categories = $article->blog->categories()->pluck('name', 'id')->all();
-        array_unshift($categories, 'No categorie');
+        $categories[0] = 'No categorie';
 
         if ($article->user_id !== Auth::id()) {
             Session::flash('flash_error', 'You don\'t have the permissions to see this page !');
