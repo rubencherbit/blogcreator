@@ -40,4 +40,12 @@ class User extends Authenticatable
             'App\Categorie', 'App\Blog'
         );
     }
+
+    public function receivedMessages() {
+        return $this->hasMany('App\Message', 'receiver_id');
+    }
+
+    public function sentMessages() {
+        returh $this->hasMany('App\Message', 'sender_id');
+    }
 }
