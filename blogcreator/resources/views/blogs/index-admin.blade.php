@@ -15,16 +15,25 @@
                             <table class="table table-borderless">
                                 <thead>
                                     <tr>
-                                        <th>ID</th><th> Title </th><th> Description </th><th> Banner </th><th>Actions</th>
+                                        <th> Title </th>
+                                        <th> Description </th>
+                                        <th> Banner </th>
+                                        <th>Nb articles</th>
+                                        <th>Nb coms</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($blog as $item)
                                     <tr>
-                                        <td>{{ $item->id }}</td>
-                                        <td>{{ $item->title }}</td><td>{{ $item->description }}</td><td>{{ $item->banner }}</td>
+                                        <td><a href="{{ url('/blogs/' . $item->id) }}" title="View Blog">{{ $item->title }}</a></td>
+                                        <td>{{ $item->description }}</td>
                                         <td>
-                                            <a href="{{ url('/blogs/' . $item->id) }}" class="btn btn-success btn-xs" title="View Blog"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"/></a>
+                                            {{ Html::image('uploads/banners/' . $item->banner, 'Bannière', ['class' => 'banner']) }}
+                                        </td>
+                                        <td>{{ $item->articles->count() }}</td>
+                                        <td>{{ $item->comments->count() }}</td>
+                                        <td>
                                             <a href="{{ url('/blogs/' . $item->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit Blog"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
                                             {!! Form::open([
                                                 'method'=>'DELETE',
