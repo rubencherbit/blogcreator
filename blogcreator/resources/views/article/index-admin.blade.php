@@ -19,6 +19,7 @@
                                         <th> Title </th>
                                         <th> Description </th>
                                         <th> Categorie </th>
+                                        <th> Nb coms</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -35,6 +36,7 @@
                                         No categorie
                                         @endif
                                         </td>
+                                        <td>{{ $item->comments->count() }}</td>
                                         <td>
                                             <a href="{{ url('/article/' . $item->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit Article"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
                                             {!! Form::open([
