@@ -3,6 +3,12 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Article;
+use App\Comment;
+use App\Blog;
+use App\Categorie;
+use App\Attachments;
+use File;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +19,19 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Article::deleted(function($article) {
+            $attachments = $article->attachments;
+            foreach ($attachments as $attachment) {
+                File::delete(public_path() . '/uploads/attachments/' . $attachment->hash);
+                $attachment->delete();
+            }
+
+            $comments = $article->comments;
+            foreach ($comments as $comment) {
+                $comment->delete();
+            }
+        });
+
     }
 
     /**
