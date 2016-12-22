@@ -10,4 +10,13 @@ do
     sleep 15
 done
 
+cd /var/www/html
+
+if [ ! -f .env ]; then
+    envsubst < ".env.example" > ".env"
+fi
+
+composer install
+php artisan key:generate
+
 exec apache2-foreground
