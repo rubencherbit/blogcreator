@@ -48,4 +48,8 @@ class User extends Authenticatable
     public function sentMessages() {
         return $this->hasMany('App\Message', 'sender_id');
     }
+
+    public function unreadMessages() {
+        return $this->receivedMessages()->where('is_read', '0');
+    }
 }
