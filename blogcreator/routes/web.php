@@ -66,6 +66,14 @@ Route::resource('message', 'MessageController', ['except' => [
 Route::get('blog/{id}/message/create', 'MessageController@create')->where('id', '[0-9]+');
 
 /*
+ * User routes
+ */
+Route::resource('user', 'UserController', ['except' => [
+    'create',
+    'store'
+]]);
+
+/*
  * Admin routes
  */
 Route::get('/admin/', 'HomeController@indexAdmin');
@@ -73,7 +81,3 @@ Route::get('/admin/blogs', 'BlogController@indexAdmin');
 Route::get('/admin/articles', 'ArticleController@indexAdmin');
 Route::get('/admin/categories', 'CategorieController@indexAdmin');
 Route::get('/admin/comments', 'CommentController@indexAdmin');
-
-Route::resource('user', 'UserController');
-
-
