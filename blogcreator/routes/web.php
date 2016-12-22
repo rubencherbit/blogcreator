@@ -53,7 +53,8 @@ Route::resource('categorie', 'CategorieController');
  * Comment routes
  */
 Route::resource('comment', 'CommentController', ['except' => [
-    'index'
+    'index',
+    'edit'
 ]]);
 
 /*
