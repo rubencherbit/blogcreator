@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAttachmentTable extends Migration
+class CreateMessageTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,13 @@ class CreateAttachmentTable extends Migration
      */
     public function up()
     {
-        Schema::create('attachments', function (Blueprint $table) {
+        Schema::create('messages', function(Blueprint $table) {
             $table->increments('id');
-            $table->string('hash');
-            $table->integer('article_id');
+            $table->integer('sender_id');
+            $table->integer('receiver_id');
+            $table->text('title');
+            $table->text('content');
+            $table->boolean('is_read');
             $table->timestamps();
         });
     }
@@ -28,6 +31,6 @@ class CreateAttachmentTable extends Migration
      */
     public function down()
     {
-        Schema::drop('attachments');
+        Schema::drop('messages');
     }
 }
