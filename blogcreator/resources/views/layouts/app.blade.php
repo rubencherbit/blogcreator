@@ -60,8 +60,7 @@
                     <li><a href="{{ url('/register') }}">Register</a></li>
                     @else
                         @php ($msgCount = Auth::user()->unreadMessages()->count())
-{{--                         @endphp
- --}}                        <li><a href="{{ url('/message') }}">Messages
+                        <li><a href="{{ url('/message') }}">Messages
                             @if ($msgCount > 0)
                             ({{ $msgCount }})
                             @endif
