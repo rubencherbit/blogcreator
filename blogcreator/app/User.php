@@ -41,6 +41,12 @@ class User extends Authenticatable
         );
     }
 
+    public function comments() {
+        return $this->hasManyThrough(
+            'App\Comment', 'App\Article'
+        );
+    }
+
     public function receivedMessages() {
         return $this->hasMany('App\Message', 'receiver_id');
     }

@@ -14,6 +14,11 @@ use App\Article;
 
 class CommentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+
+    }
     /**
      * Display a listing of the resource.
      *
@@ -24,6 +29,13 @@ class CommentController extends Controller
         $comment = Comment::paginate(25);
 
         return view('comment.index', compact('comment'));
+    }
+
+    public function indexAdmin()
+    {
+        $comment = Auth::user()->Comments()->paginate(25);
+
+        return view('comment.index-admin', compact('comment'));
     }
 
     /**
@@ -66,8 +78,11 @@ class CommentController extends Controller
     public function show($id)
     {
         $comment = Comment::findOrFail($id);
-
-        return view('comment.show', compact('comment'));
+        if($comment->article->user_id !== Auth::id()) {
+            return redirect()->route('home');
+        } else {
+            return view('comment.show', compact('comment'));
+        }
     }
 
     /**
@@ -80,7 +95,7 @@ class CommentController extends Controller
     public function edit($id)
     {
         $comment = Comment::findOrFail($id);
-        if($comment->blog->user_id === Auth::id()) {
+        if($comment->article->user_id !== Auth::id()) {
             return redirect()->route('home');
         } else {
             return view('comment.edit', compact('comment'));
@@ -108,7 +123,7 @@ class CommentController extends Controller
 
             Session::flash('flash_message', 'Comment updated!');
 
-            return redirect('comment');
+            return redirect('admin/comments');
         }
     }
 
@@ -122,14 +137,14 @@ class CommentController extends Controller
     public function destroy($id)
     {
         $comment = Comment::findorfail($id);
-        if($comment->blog->user_id === Auth::id() || $comment->user_id === Auth::id()) {
+        if($comment->article->user_id !== Auth::id()) {
             return redirect()->route('home');
         } else {
             Comment::destroy($id);
 
             Session::flash('flash_message', 'Comment deleted!');
 
-            return redirect('comment');
+            return redirect('admin/comments');
         }
     }
 }
