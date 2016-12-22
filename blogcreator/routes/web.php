@@ -50,10 +50,21 @@ Route::get('blog/{id}/article/by-month/{month}', 'ArticleController@getByMonth')
 Route::resource('categorie', 'CategorieController');
 
 /*
+ * Comment routes
+ */
+Route::resource('comment', 'CommentController');
+
+/*
+ * Message routes
+ */
+Route::resource('message', 'MessageController', ['except' => [
+    'create'
+]]);
+Route::get('blog/{id}/message/create', 'MessageController@create')->where('id', '[0-9]+');
+
+/*
  * Admin routes
  */
 Route::get('/admin/blogs', 'BlogController@indexAdmin');
 Route::get('/admin/articles', 'ArticleController@indexAdmin');
 Route::get('/admin/categories', 'CategorieController@indexAdmin');
-
-Route::resource('comment', 'CommentController');
