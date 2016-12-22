@@ -70,7 +70,8 @@ Route::get('blog/{id}/message/create', 'MessageController@create')->where('id', 
  */
 Route::resource('user', 'UserController', ['except' => [
     'create',
-    'store'
+    'store',
+    'destroy'
 ]]);
 
 /*
