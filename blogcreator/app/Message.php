@@ -25,7 +25,6 @@ class Message extends Model
      *
      * @var array
      */
-    protected $fillable = ['receiver', 'title', 'content'];
+    protected $fillable = ['receiver_id', 'title', 'content', 'sender_id', 'is_read'];
 
-    
 }
