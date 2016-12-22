@@ -69,3 +69,7 @@ Route::get('/admin/', 'HomeController@indexAdmin');
 Route::get('/admin/blogs', 'BlogController@indexAdmin');
 Route::get('/admin/articles', 'ArticleController@indexAdmin');
 Route::get('/admin/categories', 'CategorieController@indexAdmin');
+
+Route::resource('user', 'UserController');
+
+
