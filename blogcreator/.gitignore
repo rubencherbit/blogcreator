@@ -7,3 +7,5 @@ Homestead.yaml
 .env
 
 /public/uploads
+MAMP_php_error_log_MAMP
+*.DS_Store
