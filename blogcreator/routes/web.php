@@ -57,7 +57,10 @@ Route::resource('comment', 'CommentController');
 /*
  * Message routes
  */
-Route::resource('message', 'MessageController');
+Route::resource('message', 'MessageController', ['except' => [
+    'create'
+]]);
+Route::get('blog/{id}/message/create', 'MessageController@create')->where('id', '[0-9]+');
 
 /*
  * Admin routes
