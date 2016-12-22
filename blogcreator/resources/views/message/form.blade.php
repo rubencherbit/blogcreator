@@ -1,7 +1,9 @@
 <div class="form-group {{ $errors->has('receiver') ? 'has-error' : ''}}">
     {!! Form::label('receiver', 'Receiver', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::text('receiver', null, ['class' => 'form-control']) !!}
+        {!! Form::text('receiver', $receiver->name, ['class' => 'form-control', 'readonly']) !!}
+        {!! Form::hidden('receiver_id', $receiver->id, ['class' => 'form-control']) !!}
+        {!! Form::hidden('blog_id', $curr_blog->id, ['class' => 'form-control']) !!}
         {!! $errors->first('receiver', '<p class="help-block">:message</p>') !!}
     </div>
 </div><div class="form-group {{ $errors->has('title') ? 'has-error' : ''}}">

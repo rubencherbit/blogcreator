@@ -5,12 +5,20 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Blog;
+use Auth;
+
 use App\Message;
 use Illuminate\Http\Request;
 use Session;
 
 class MessageController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+
+    }
     /**
      * Display a listing of the resource.
      *
@@ -28,9 +36,12 @@ class MessageController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function create()
+    public function create($blog_id)
     {
-        return view('message.create');
+        $curr_blog = Blog::findOrFail($blog_id);
+        $receiver = $curr_blog->user;
+
+        return view('message.create', compact('curr_blog', 'receiver'));
     }
 
     /**
@@ -42,14 +53,21 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        
         $requestData = $request->all();
-        
+
+        $user = Auth::user();
+        $blog_id = $requestData['blog_id'];
+        unset($requestData['receiver']);
+        unset($requestData['blog_id']);
+
+        $requestData['sender_id'] = $user->id;
+        $requestData['is_read'] = 0;
         Message::create($requestData);
 
         Session::flash('flash_message', 'Message added!');
 
-        return redirect('message');
+        return redirect()->route('blogs.show', ['id' => $blog_id]);
+
     }
 
     /**
@@ -90,9 +108,9 @@ class MessageController extends Controller
      */
     public function update($id, Request $request)
     {
-        
+
         $requestData = $request->all();
-        
+
         $message = Message::findOrFail($id);
         $message->update($requestData);
 
