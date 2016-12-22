@@ -39,4 +39,9 @@ class Message extends Model
     public function isRead() {
         return ($this->is_read === 0) ? 'Not read' : 'Read';
     }
+
+    public function markAsRead() {
+        $this->update(['is_read' => 1]);
+        return true;
+    }
 }
