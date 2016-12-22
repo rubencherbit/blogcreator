@@ -76,7 +76,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = Auth::user();
-        if($id != Auth::id()) {
+        if($id != $user->id) {
             return redirect()->route('home');
         } else {
             return view('user.edit', compact('user'));
@@ -103,7 +103,7 @@ class UserController extends Controller
 
             Session::flash('flash_message', 'User updated!');
 
-            return redirect('user');
+            return redirect('/admin');
         }
     }
 
@@ -116,15 +116,15 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        if($id != Auth::id()) {
-            return redirect()->route('home');
-        } else {
+        // if($id != Auth::id()) {
+        //     return redirect()->route('home');
+        // } else {
 
-            User::destroy($id);
+        //     User::destroy($id);
 
-            Session::flash('flash_message', 'User deleted!');
+        //     Session::flash('flash_message', 'User deleted!');
 
-            return redirect('user');
-        }
+        //     return redirect('user');
+        // }
     }
 }
