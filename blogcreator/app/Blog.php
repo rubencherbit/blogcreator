@@ -64,4 +64,11 @@ class Blog extends Model
             });
         return $years;
     }
+
+    public function comments()
+    {
+        return $this->hasManyThrough(
+            'App\Comment', 'App\Article'
+        );
+    }
 }

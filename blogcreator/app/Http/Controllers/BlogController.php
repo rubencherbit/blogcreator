@@ -134,7 +134,7 @@ class BlogController extends Controller
 
 
         if ($request->hasFile('banner')) {
-            $uploadPath = public_path('/uploads/');
+            $uploadPath = public_path('/uploads/banners/');
 
             $extension = $request->file('banner')->getClientOriginalExtension();
             $fileName = rand(11111, 99999) . '.' . $extension;

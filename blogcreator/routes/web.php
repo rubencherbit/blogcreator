@@ -47,7 +47,9 @@ Route::get('blog/{id}/article/by-month/{month}', 'ArticleController@getByMonth')
 /*
  * Categorie routes
  */
-Route::resource('categorie', 'CategorieController');
+Route::resource('categorie', 'CategorieController', ['except' => [
+    'index'
+]]);
 
 /*
  * Comment routes

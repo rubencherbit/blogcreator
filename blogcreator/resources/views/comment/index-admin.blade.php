@@ -29,7 +29,6 @@
                                         <td><a href="{{ url('/article/' . $item->article->id) }}" title="View Article">{{ $item->article->title }}</a></td>
                                         <td>{{ $item->created_at }}</td>
                                         <td>
-                                            <a href="{{ url('/comment/' . $item->id) }}" class="btn btn-success btn-xs" title="View Comment"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"/></a>
                                             {!! Form::open([
                                                 'method'=>'DELETE',
                                                 'url' => ['/comment', $item->id],
