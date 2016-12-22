@@ -83,6 +83,7 @@ class MessageController extends Controller
         $message = Message::findOrFail($id);
 
         if ($message->receiver->id !== $user->id) {
+            Session::flash('flash_error', 'You don\'t have the permissions to see this page !');
             return redirect()->route('home');
         } else {
             $message->markAsRead();

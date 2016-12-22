@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 use Auth;
+use Session;
 
 class LoginController extends Controller
 {
@@ -42,6 +43,7 @@ class LoginController extends Controller
     public function logout()
     {
         Auth::logout();
+        Session::flash('flash_error', 'You are now logged-out.');
         return redirect()->route('home');
 
     }

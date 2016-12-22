@@ -79,6 +79,7 @@ class CommentController extends Controller
     {
         $comment = Comment::findOrFail($id);
         if($comment->article->user_id !== Auth::id()) {
+            Session::flash('flash_error', 'You don\'t have the permissions to see this page !');
             return redirect()->route('home');
         } else {
             return view('comment.show', compact('comment'));
@@ -96,6 +97,7 @@ class CommentController extends Controller
     {
         $comment = Comment::findOrFail($id);
         if($comment->article->user_id !== Auth::id()) {
+            Session::flash('flash_error', 'You don\'t have the permissions to see this page !');
             return redirect()->route('home');
         } else {
             return view('comment.edit', compact('comment'));
@@ -117,6 +119,7 @@ class CommentController extends Controller
 
         $comment = Comment::findorfail($id);
         if($comment->blog->user_id === Auth::id()) {
+            Session::flash('flash_error', 'You don\'t have the permissions to see this page !');
             return redirect()->route('home');
         } else {
             $comment->update($requestData);
@@ -138,6 +141,7 @@ class CommentController extends Controller
     {
         $comment = Comment::findorfail($id);
         if($comment->article->user_id !== Auth::id()) {
+            Session::flash('flash_error', 'You don\'t have the permissions to see this page !');
             return redirect()->route('home');
         } else {
             Comment::destroy($id);
