@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use Auth;
 use App\User;
 use Illuminate\Http\Request;
 use Session;
@@ -18,9 +18,13 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = User::paginate(25);
+        if($id !== Auth::id()) {
+            return redirect()->route('home');
+        } else {
+            $user = Auth::user();
 
-        return view('user.index', compact('user'));
+            return view('user.show', compact('user'));
+        }
     }
 
     /**
@@ -30,7 +34,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('user.create');
+        // return view('user.create');
     }
 
     /**
@@ -42,14 +46,14 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        
-        $requestData = $request->all();
-        
-        User::create($requestData);
 
-        Session::flash('flash_message', 'User added!');
+        // $requestData = $request->all();
 
-        return redirect('user');
+        // User::create($requestData);
+
+        // Session::flash('flash_message', 'User added!');
+
+        // return redirect('user');
     }
 
     /**
@@ -75,9 +79,13 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = User::findOrFail($id);
+        $user = Auth::user();
+        if($id !== Auth::id()) {
+            return redirect()->route('home');
+        } else {
 
-        return view('user.edit', compact('user'));
+            return view('user.edit', compact('user'));
+        }
     }
 
     /**
@@ -90,15 +98,18 @@ class UserController extends Controller
      */
     public function update($id, Request $request)
     {
-        
+
         $requestData = $request->all();
-        
-        $user = User::findOrFail($id);
-        $user->update($requestData);
+        if($id !== Auth::id()) {
+            return redirect()->route('home');
+        } else {
+            $user = Auth::user();
+            $user->update($requestData);
 
-        Session::flash('flash_message', 'User updated!');
+            Session::flash('flash_message', 'User updated!');
 
-        return redirect('user');
+            return redirect('user');
+        }
     }
 
     /**
@@ -110,10 +121,15 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        User::destroy($id);
+        if($id !== Auth::id()) {
+            return redirect()->route('home');
+        } else {
 
-        Session::flash('flash_message', 'User deleted!');
+            User::destroy($id);
 
-        return redirect('user');
+            Session::flash('flash_message', 'User deleted!');
+
+            return redirect('user');
+        }
     }
 }
