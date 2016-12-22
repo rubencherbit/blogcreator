@@ -77,6 +77,7 @@ class ArticleController extends Controller
 
         $blog = Blog::findOrFail($requestData['blog_id']);
         if($blog->user_id !== Auth::id()) {
+            Session::flash('flash_error', 'You don\'t have the permissions to see this page !');
             return redirect()->route('home');
         } else {
             $article = Article::create($requestData);
@@ -123,6 +124,7 @@ class ArticleController extends Controller
         array_unshift($categories, 'No categorie');
 
         if ($article->user_id !== Auth::id()) {
+            Session::flash('flash_error', 'You don\'t have the permissions to see this page !');
             return redirect()->route('home');
         } else {
             return view('article.edit', compact('article', 'attachments','categories'));
@@ -144,6 +146,7 @@ class ArticleController extends Controller
 
         $article = Article::findOrFail($id);
         if ($article->user_id !== Auth::id() || $article->blog->user_id !== Auth::id() ) {
+            Session::flash('flash_error', 'You don\'t have the permissions to see this page !');
             return redirect()->route('home');
         } else {
             $article->update($requestData);
@@ -169,6 +172,7 @@ class ArticleController extends Controller
     {
         $article = Article::findOrFail($id);
         if ($article->user_id !== Auth::id() || $article->blog->user_id !== Auth::id() ) {
+            Session::flash('flash_error', 'You don\'t have the permissions to see this page !');
             return redirect()->route('home');
         } else {
 
@@ -191,6 +195,7 @@ class ArticleController extends Controller
 
             return redirect()->route('article.edit', $attachment->article_id);
         } else {
+            Session::flash('flash_error', 'You don\'t have the permissions to see this page !');
             return redirect()->route('home');
         }
     }

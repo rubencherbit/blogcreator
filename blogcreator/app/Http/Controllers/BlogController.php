@@ -113,6 +113,7 @@ class BlogController extends Controller
     {
         $blog = Blog::findOrFail($id);
         if ($blog->user_id !== Auth::id()) {
+            Session::flash('flash_error', 'You don\'t have the permissions to see this page !');
             return redirect()->route('home');
         } else {
             return view('blogs.edit', compact('blog'));
@@ -145,6 +146,7 @@ class BlogController extends Controller
 
         $blog = Blog::findOrFail($id);
         if ($blog->user_id !== Auth::id()) {
+            Session::flash('flash_error', 'You don\'t have the permissions to see this page !');
             return redirect()->route('home');
         } else {
             $blog->update($requestData);
@@ -166,6 +168,7 @@ class BlogController extends Controller
     {
         $blog = Blog::findOrFail($id);
         if ($blog->user_id !== Auth::id()) {
+            Session::flash('flash_error', 'You don\'t have the permissions to see this page !');
             return redirect()->route('home');
         } else {
             Blog::destroy($id);

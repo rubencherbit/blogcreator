@@ -64,6 +64,7 @@ class CategorieController extends Controller
         $blog = Blog::findOrFail($requestData['blog_id']);
 
         if($blog->user_id !== Auth::id()) {
+            Session::flash('flash_error', 'You don\'t have the permissions to see this page !');
             return redirect()->route('home');
         } else {
             Categorie::create($requestData);
@@ -102,6 +103,7 @@ class CategorieController extends Controller
         $blogs = Auth::user()->Blogs()->pluck('title', 'id')->all();
 
         if($categorie->blog->user_id !== Auth::id()) {
+            Session::flash('flash_error', 'You don\'t have the permissions to see this page !');
             return redirect()->route('home');
         } else {
             return view('categorie.edit', compact('categorie', 'blogs'));
@@ -124,6 +126,7 @@ class CategorieController extends Controller
         $categorie = Categorie::findOrFail($id);
 
         if($categorie->blog->user_id !== Auth::id()) {
+            Session::flash('flash_error', 'You don\'t have the permissions to see this page !');
             return redirect()->route('home');
         } else {
             $categorie->update($requestData);
@@ -145,6 +148,7 @@ class CategorieController extends Controller
     {
         $categorie = Categorie::findOrFail($id);
         if($categorie->blog->user_id !== Auth::id()) {
+            Session::flash('flash_error', 'You don\'t have the permissions to see this page !');
             return redirect()->route('home');
         } else {
             Categorie::destroy($id);

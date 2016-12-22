@@ -77,6 +77,7 @@ class UserController extends Controller
     {
         $user = Auth::user();
         if($id != $user->id) {
+            Session::flash('flash_error', 'You don\'t have the permissions to see this page !');
             return redirect()->route('home');
         } else {
             return view('user.edit', compact('user'));
@@ -96,6 +97,7 @@ class UserController extends Controller
 
         $requestData = $request->all();
         if($id != Auth::id()) {
+            Session::flash('flash_error', 'You don\'t have the permissions to see this page !');
             return redirect()->route('home');
         } else {
             $user = Auth::user();
