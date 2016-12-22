@@ -39,7 +39,7 @@
                                 @endforeach
                             </ul>
                         </div>
-
+                        <a href="{{ url('/blog/'. $curr_blog->id .'/message/create') }}" title="Contact the Author" class="btn btn-success">Contact {{ $article->user->name }} !</a>
                         <div>
                             <h2>Comments</h2>
                             @include ('comment.article-comments')
