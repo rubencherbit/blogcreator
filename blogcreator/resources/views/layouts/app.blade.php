@@ -65,6 +65,8 @@
                             ({{ $msgCount }})
                             @endif
                         </a></li>
+                        <li><a href="{{ url('/user/' . Auth::id()) }}" title="View Profile">Profile</a></li>
+                        <li><a href="{{ url('/admin') }}" title="View Admin Panel">Admin</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                 {{ Auth::user()->name }} <span class="caret"></span>

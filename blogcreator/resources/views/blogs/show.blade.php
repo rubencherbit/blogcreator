@@ -14,6 +14,8 @@
 
                     @include ('article.list-date')
 
+                    <a href="{{ url('/blog/'. $curr_blog->id .'/message/create') }}" title="Contact the Author" class="btn btn-success">Contact {{ $curr_blog->user->name }} !</a>
+
                     </div>
                 </div>
             </div>

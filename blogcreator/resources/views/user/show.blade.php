@@ -13,7 +13,7 @@
                                     <tr>
                                         <th>Email</th><td>{{ $user->email }}</td>
                                     </tr>
-                                    <tr><th> Name </th><td> {{ $user->name }} </td></tr>
+                                    <tr><th> Name </th><td><a href="{{ url('/user/' . $user->id) }}" title="View User">{{ $user->name }}</a></td></tr>
                                 </tbody>
                             </table>
                         </div>

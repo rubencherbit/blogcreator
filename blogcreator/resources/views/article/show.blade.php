@@ -21,7 +21,7 @@
                                         @endif
                                         </td>
                                     </tr>
-                                    <tr><th> Author </th><td> {{ $article->user->name }} </td></tr>
+                                    <tr><th> Author </th><td><a href="{{ url('/user/' . $article->user->id) }}" title="View User">{{ $article->user->name }}</a></td></tr>
                                     <tr><th> Description </th><td> {{ $article->description }} </td></tr>
                                     <tr><th> Content </th><td> {{ $article->content }} </td></tr>
                                 </tbody>
@@ -39,7 +39,7 @@
                                 @endforeach
                             </ul>
                         </div>
-
+                        <a href="{{ url('/blog/'. $curr_blog->id .'/message/create') }}" title="Contact the Author" class="btn btn-success">Contact {{ $article->user->name }} !</a>
                         <div>
                             <h2>Comments</h2>
                             @include ('comment.article-comments')

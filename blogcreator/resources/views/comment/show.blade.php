@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Comment by {{ $comment->user->name }}</div>
+                    <div class="panel-heading">Comment by <a href="{{ url('/user/' . $comment->user->id) }}" title="View User">{{ $comment->user->name }}</a></div>
                     <div class="panel-body">
 
                         {!! Form::open([
@@ -32,7 +32,7 @@
                                     </tr>
                                     <tr>
                                         <th> Author </th>
-                                        <td> {{ $comment->user->name }} </td>
+                                        <td><a href="{{ url('/user/' . $comment->user->id) }}" title="View User">{{ $comment->user->name }}</a></td>
                                     </tr>
                                     <tr>
                                         <th> Blog </th>

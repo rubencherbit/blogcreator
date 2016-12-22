@@ -13,7 +13,7 @@
                                 <tbody>
                                     <tr>
                                         <th>Sender</th>
-                                        <td>{{ $message->sender->name }}</td>
+                                        <td><a href="{{ url('/user/' . $message->sender->id) }}" title="View User">{{ $message->sender->name }}</a></td>
                                     </tr>
                                     <tr>
                                         <th> Date </th>

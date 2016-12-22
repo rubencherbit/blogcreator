@@ -23,7 +23,7 @@
                                 <tbody>
                                 @foreach($message as $item)
                                     <tr>
-                                        <td>{{ $item->sender->name }}</td>
+                                        <td><a href="{{ url('/user/' . $item->sender->id) }}" title="View User">{{ $item->sender->name }}</a></td>
                                         <td>{{ $item->title }}</td>
                                         <td>{{ $item->content }}</td>
                                         <td>{{ $item->isRead() }}</td>

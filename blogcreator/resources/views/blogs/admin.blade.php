@@ -20,6 +20,7 @@
                                 <tr><td><a href="{{ url('/admin/articles') }}">Administration des articles</a></td></tr>
                                 <tr><td><a href="{{ url('/admin/categories') }}">Administration des catégories</a></td></tr>
                                 <tr><td><a href="{{ url('/admin/comments') }}">Administration des commentaires</a></td></tr>
+                                <tr><td><a href="{{ url('/user/'. Auth::id() .'/edit') }}">Edition du profil</a></td></tr>
                             </tbody>
                         </table>
                     </div>
