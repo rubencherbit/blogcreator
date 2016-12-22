@@ -15,16 +15,19 @@
                             <table class="table table-borderless">
                                 <thead>
                                     <tr>
-                                        <th>ID</th><th> Blog Id </th><th> Title </th><th> Description </th><th>Actions</th>
+                                        <th> Blog </th>
+                                        <th> Title </th>
+                                        <th> Description </th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($article as $item)
                                     <tr>
-                                        <td>{{ $item->id }}</td>
-                                        <td>{{ $item->blog_id }}</td><td>{{ $item->title }}</td><td>{{ $item->description }}</td>
+                                        <td><a href="{{ url('/blogs/' . $item->blog_id) }}">{{ $item->blog->title }}</a></td>
+                                        <td><a href="{{ url('/article/' . $item->id) }}">{{ $item->title }}</a></td>
+                                        <td>{{ $item->description }}</td>
                                         <td>
-                                            <a href="{{ url('/article/' . $item->id) }}" class="btn btn-success btn-xs" title="View Article"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"/></a>
                                             <a href="{{ url('/article/' . $item->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit Article"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
                                             {!! Form::open([
                                                 'method'=>'DELETE',
