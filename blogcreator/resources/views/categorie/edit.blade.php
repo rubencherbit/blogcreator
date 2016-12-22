@@ -23,7 +23,7 @@
                             'files' => true
                         ]) !!}
 
-                        @include ('categorie.form', ['submitButtonText' => 'Update'])
+                        @include ('categorie.edit-form', ['submitButtonText' => 'Update'])
 
                         {!! Form::close() !!}
 

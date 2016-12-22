@@ -18,7 +18,7 @@
 
                         {!! Form::open(['url' => '/categorie', 'class' => 'form-horizontal', 'files' => true]) !!}
 
-                        @include ('categorie.form')
+                        @include ('categorie.create-form')
 
                         {!! Form::close() !!}
 
