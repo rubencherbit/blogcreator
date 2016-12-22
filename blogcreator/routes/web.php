@@ -52,7 +52,9 @@ Route::resource('categorie', 'CategorieController');
 /*
  * Comment routes
  */
-Route::resource('comment', 'CommentController');
+Route::resource('comment', 'CommentController', ['except' => [
+    'index'
+]]);
 
 /*
  * Message routes
@@ -69,3 +71,4 @@ Route::get('/admin/', 'HomeController@indexAdmin');
 Route::get('/admin/blogs', 'BlogController@indexAdmin');
 Route::get('/admin/articles', 'ArticleController@indexAdmin');
 Route::get('/admin/categories', 'CategorieController@indexAdmin');
+Route::get('/admin/comments', 'CommentController@indexAdmin');
