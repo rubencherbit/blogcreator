@@ -18,6 +18,7 @@
                                         <th> Blog </th>
                                         <th> Title </th>
                                         <th> Description </th>
+                                        <th> Categorie </th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -27,6 +28,13 @@
                                         <td><a href="{{ url('/blogs/' . $item->blog_id) }}">{{ $item->blog->title }}</a></td>
                                         <td><a href="{{ url('/article/' . $item->id) }}">{{ $item->title }}</a></td>
                                         <td>{{ $item->description }}</td>
+                                        <td>
+                                        @if (isset($item->categorie->name))
+                                        <a href="{{ url('/categorie/' . $item->categorie->id) }}" title="View Categorie">{{ $item->categorie->name }}</a>
+                                        @else
+                                        No categorie
+                                        @endif
+                                        </td>
                                         <td>
                                             <a href="{{ url('/article/' . $item->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit Article"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
                                             {!! Form::open([
