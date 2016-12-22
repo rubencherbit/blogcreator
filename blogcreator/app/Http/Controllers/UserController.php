@@ -18,13 +18,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        if($id !== Auth::id()) {
-            return redirect()->route('home');
-        } else {
             $user = Auth::user();
 
             return view('user.show', compact('user'));
-        }
     }
 
     /**
@@ -80,10 +76,9 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = Auth::user();
-        if($id !== Auth::id()) {
+        if($id != Auth::id()) {
             return redirect()->route('home');
         } else {
-
             return view('user.edit', compact('user'));
         }
     }
@@ -100,7 +95,7 @@ class UserController extends Controller
     {
 
         $requestData = $request->all();
-        if($id !== Auth::id()) {
+        if($id != Auth::id()) {
             return redirect()->route('home');
         } else {
             $user = Auth::user();
@@ -121,7 +116,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        if($id !== Auth::id()) {
+        if($id != Auth::id()) {
             return redirect()->route('home');
         } else {
 
