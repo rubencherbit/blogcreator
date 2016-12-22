@@ -79,9 +79,15 @@ class MessageController extends Controller
      */
     public function show($id)
     {
+        $user = Auth::user();
         $message = Message::findOrFail($id);
 
-        return view('message.show', compact('message'));
+        if ($message->receiver->id !== $user->id) {
+            return redirect()->route('home');
+        } else {
+            $message->markAsRead();
+            return view('message.show', compact('message'));
+        }
     }
 
     /**
