@@ -21,8 +21,14 @@ class BlogController extends Controller
         ]);
 
     }
-    public function follow_blogs()
+    public function follow_blog($id)
     {
+        if(Auth::id() !== null) {
+            $blog = Blog::findOrFail($id);
+            if($blog->user_id !== Auth::id()) {
+                Auth::user()->follow_blogs()->sync([Auth::id(), $id]);
+            }
+        }
     }
     /**
      * Display a listing of the resource.
