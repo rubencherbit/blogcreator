@@ -71,9 +71,4 @@ class Blog extends Model
             'App\Comment', 'App\Article'
         );
     }
-    public function shared_articles()
-    {
-        return $this->belongsToMany('App\Article', 'share_article');
-    }
-
 }
