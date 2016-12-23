@@ -62,5 +62,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Blog', 'users_blogs');
     }
+    public function is_follow($id)
+    {
+        return $this->follow_blogs()->where('blog_id', $id)->first();
+    }
 
 }
