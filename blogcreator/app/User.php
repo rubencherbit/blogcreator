@@ -60,7 +60,7 @@ class User extends Authenticatable
     }
     public function follow_blogs()
     {
-        return $this->hasMany('App\Blog');
+        return $this->belongsToMany('App\Blog');
     }
 
 }
