@@ -10,7 +10,7 @@
             </tr>
         </thead>
         <tbody>
-        @foreach($articles as $item)
+            @foreach($articles as $item)
             <tr>
                 <td><a href="{{ url('/article/' . $item->id) }}" title="View Article">{{ $item->title }}</a></td>
                 <td>
@@ -20,10 +20,14 @@
                     No categorie
                     @endif
                 </td>
+                @if(Auth::user()->name  === $item->user->name)
                 <td><a href="{{ url('/user/' . $item->user->id) }}" title="View Blog">{{ $item->user->name }}</a></td>
+                @else
+                <td><a href="{{ url('/user/' . $item->user->id) }}" title="View Blog">{{ $item->user->name }} (Article partagé)</a></td>
+                @endif
                 <td>{{ $item->created_at }}</td>
             </tr>
-        @endforeach
+            @endforeach
         </tbody>
     </table>
 </div>
