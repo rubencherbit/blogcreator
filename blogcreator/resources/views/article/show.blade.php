@@ -5,7 +5,14 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">{{ $article->title }}</div>
+                @if($article->user_id !== Auth::id() && Auth::id() !== null && $article->is_share(Auth::id()) === null)
+                <div class="panel-heading">{{ $article->title }}<a href="{{url('/article/' . $article->id . '/share')}}" style="float: right !important;">Share this article !</a></div>
+                @elseif (Auth::user()->is_follow($article->id) !== null)
+                <div class="panel-heading">{{ $article->title }} <span style="float: right !important;">You already share this article !</span></div>
+                @else
+                <div class="panel-heading">{{ $article->title }}</div>
+                @endif
+                    <!--<div class="panel-heading">{{ $article->title }}</div>-->
                     <div class="panel-body">
 
                         <div class="table-responsive">
