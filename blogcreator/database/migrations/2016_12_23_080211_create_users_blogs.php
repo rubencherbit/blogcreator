@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UsersBlogs extends Migration
+class CreateUsersBlogs extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,10 @@ class UsersBlogs extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('users_blogs', function (Blueprint $table) {
+            $table->integer('user_id');
+            $table->integer('blog_id');
+        });
     }
 
     /**
