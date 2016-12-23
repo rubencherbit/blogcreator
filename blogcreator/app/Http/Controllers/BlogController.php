@@ -26,7 +26,7 @@ class BlogController extends Controller
         if(Auth::id() !== null) {
             $blog = Blog::findOrFail($id);
             if($blog->user_id !== Auth::id()) {
-                Auth::user()->follow_blogs()->sync([Auth::id(), $id]);
+                Auth::user()->follow_blogs()->syncWithoutDetaching([$id]);
                 Session::flash('flash_message', 'Blog followed!');
                 return  redirect()->action(
                     'BlogController@show', ['id' => $id]
