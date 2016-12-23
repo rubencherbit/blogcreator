@@ -1,6 +1,7 @@
 #!/bin/bash
-
+mkdir /var/www/html/public/uploads
 chown -R www-data:www-data /var/www/html/storage
+chown -R www-data:www-data /var/www/html/public/uploads
 
 composer install
 
