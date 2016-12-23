@@ -18,7 +18,7 @@ class BlogController extends Controller
             'show',
             'index'
             ]
-        ]);
+            ]);
 
     }
     public function follow_blog($id)
@@ -27,7 +27,17 @@ class BlogController extends Controller
             $blog = Blog::findOrFail($id);
             if($blog->user_id !== Auth::id()) {
                 Auth::user()->follow_blogs()->sync([Auth::id(), $id]);
+                Session::flash('flash_message', 'Blog followed!');
+                return  redirect()->action(
+                    'BlogController@show', ['id' => $id]
+                    );
+            } else {
+                Session::flash('flash_error', 'nop nop nop');
+                return  redirect()->route('/');
             }
+        } else {
+            Session::flash('flash_error', 'nop nop nop');
+            return  redirect()->route('/');
         }
     }
     /**
