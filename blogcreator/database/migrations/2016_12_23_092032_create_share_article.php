@@ -14,7 +14,7 @@ class CreateShareArticle extends Migration
     public function up()
     {
         Schema::create('share_article', function (Blueprint $table) {
-            $table->integer('user_id');
+            $table->integer('blog_id');
             $table->integer('article_id');
         });
     }
