@@ -18,6 +18,9 @@
                             </table>
                         </div>
 
+                        @if (Auth::id() == $user->id)
+                        @include ('user.news-feed')
+                        @endif
                     </div>
                 </div>
             </div>
