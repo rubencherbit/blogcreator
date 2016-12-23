@@ -75,6 +75,7 @@ Route::resource('user', 'UserController', ['except' => [
     'store',
     'destroy'
 ]]);
+Route::get('/follow_blog/{id}', 'BlogController@follow_blog');
 
 /*
  * Admin routes
