@@ -58,4 +58,9 @@ class User extends Authenticatable
     public function unreadMessages() {
         return $this->receivedMessages()->where('is_read', '0');
     }
+    public function follow_blogs()
+    {
+        return $this->hasMany('App\Blog');
+    }
+
 }
