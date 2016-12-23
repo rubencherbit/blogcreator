@@ -33,11 +33,11 @@ class BlogController extends Controller
                     );
             } else {
                 Session::flash('flash_error', 'nop nop nop');
-                return  redirect()->route('/');
+                return  redirect()->route('home');
             }
         } else {
             Session::flash('flash_error', 'nop nop nop');
-            return  redirect()->route('/');
+            return  redirect()->route('home');
         }
     }
     /**
