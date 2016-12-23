@@ -21,6 +21,9 @@ class BlogController extends Controller
         ]);
 
     }
+    public function follow_blogs()
+    {
+    }
     /**
      * Display a listing of the resource.
      *
