@@ -23,32 +23,26 @@ class ArticleController extends Controller
             'getByYear',
             'getByMonth',
             ]
-            ]);
+        ]);
 
     }
-    public function share_article($id, Request $request)
+    public function share_article($id)
     {
         if(Auth::id() !== null) {
-            $article = Article::findOrFail($request->request->get('blog_id'));
+            $article = Article::findOrFail($id);
             if($article->user_id !== Auth::id()) {
-                $blog = Blog::findOrFail($id);
-                if($blog->user_id !== Auth::id()) {
-                    $blog->shared_articles()->syncWithoutDetaching([$id]);
-                    Session::flash('flash_message', 'Article shared!');
-                    return redirect()->action(
-                        'ArticleController@show', ['id' => $id]
-                        );
-                } else {
-                    Session::flash('flash_error', 'nop nop nop');
-                    return redirect()->route('/');
-                }
+                Auth::user()->shared_articles()->syncWithoutDetaching([$id]);
+                Session::flash('flash_message', 'Article shared!');
+                return  redirect()->action(
+                    'ArticleController@show', ['id' => $id]
+                    );
             } else {
                 Session::flash('flash_error', 'nop nop nop');
-                return redirect()->route('/');
+                return  redirect()->route('/');
             }
         } else {
             Session::flash('flash_error', 'nop nop nop');
-            return redirect()->route('/');
+            return  redirect()->route('/');
         }
 
     }
