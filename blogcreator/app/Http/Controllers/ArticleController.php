@@ -29,10 +29,10 @@ class ArticleController extends Controller
     public function share_article($id, Request $request)
     {
         if(Auth::id() !== null) {
-            $article = Article::findOrFail($request->request->get('blog_id'));
+            $article = Article::findOrFail($id);
             if($article->user_id !== Auth::id()) {
-                $blog = Blog::findOrFail($id);
-                if($blog->user_id !== Auth::id()) {
+                $blog = Blog::findOrFail($request->request->get('blog_id'));
+                if($blog->user_id === Auth::id()) {
                     $blog->shared_articles()->syncWithoutDetaching([$id]);
                     Session::flash('flash_message', 'Article shared!');
                     return redirect()->action(
@@ -40,15 +40,15 @@ class ArticleController extends Controller
                         );
                 } else {
                     Session::flash('flash_error', 'nop nop nop');
-                    return redirect()->route('/');
+                    return redirect()->route('home');
                 }
             } else {
                 Session::flash('flash_error', 'nop nop nop');
-                return redirect()->route('/');
+                return redirect()->route('home');
             }
         } else {
             Session::flash('flash_error', 'nop nop nop');
-            return redirect()->route('/');
+            return redirect()->route('home');
         }
 
     }
