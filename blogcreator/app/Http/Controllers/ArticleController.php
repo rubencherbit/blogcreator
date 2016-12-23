@@ -125,8 +125,9 @@ class ArticleController extends Controller
         $attachments = $article->attachments;
         $comments = $article->Comments()->paginate(25);
         $curr_blog = $article->blog;
+        $blogs = Auth::user()->Blogs()->pluck('title', 'id')->all();
 
-        return view('article.show', compact('article', 'attachments', 'comments', 'curr_blog'));
+        return view('article.show', compact('article', 'attachments', 'comments', 'curr_blog', 'blogs'));
     }
 
     /**
@@ -237,4 +238,5 @@ class ArticleController extends Controller
 
         return view('article.list-by', compact('curr_blog', 'articles', 'date'));
     }
+
 }
