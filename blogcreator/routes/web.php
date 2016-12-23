@@ -42,7 +42,7 @@ Route::resource('article', 'ArticleController');
 Route::delete('article/destroy-attachment/{id}', 'ArticleController@destroyAttachment')->where('id', '[0-9]+');
 Route::get('blog/{id}/article/by-year/{year}', 'ArticleController@getByYear')->where(['id' => '[0-9]+', 'year' =>'[0-9]{4}']);
 Route::get('blog/{id}/article/by-month/{month}', 'ArticleController@getByMonth')->where(['id' => '[0-9]+', 'month', '[0-9]{4}-[0-9]{2}']);
-
+Route::post('article/{id}/share', 'ArticleController@share_Article')->where('id', '[0-9]+');
 
 /*
  * Categorie routes

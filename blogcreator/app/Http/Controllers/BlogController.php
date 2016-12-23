@@ -117,6 +117,8 @@ class BlogController extends Controller
         $categories = $curr_blog->categories;
         $years = $curr_blog->years();
         $months = $curr_blog->months();
+        $sharedArticles = $curr_blog->shared_articles;
+        $articles = $articles->merge($sharedArticles);
 
         return view('blogs.show', compact('curr_blog', 'articles', 'categories', 'years', 'months'));
     }
