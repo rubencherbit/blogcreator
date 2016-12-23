@@ -62,8 +62,20 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::findOrFail($id);
+        $followedBlogs = $user->follow_blogs;
 
-        return view('user.show', compact('user'));
+        $articles = [];
+        foreach($followedBlogs as $blog) {
+            foreach($blog->articles as $article) {
+                array_push($articles, $article);
+            }
+        }
+        usort($articles, function($a, $b)
+        {
+            return strcmp($a->created_at, $b->created_at);
+        });
+
+        return view('user.show', compact('user', 'articles'));
     }
 
     /**
